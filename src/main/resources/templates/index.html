@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <title>Kochbuch</title>
@@ -12,7 +12,24 @@
             <div class="page-header">
                 <h1>Kochbuch</h1>
             </div>
+
+            <form action="search.html" method="get">
+
+                Ich hab Lust auf...  <input type="text" name="searchItem">
+
+                <input type="submit" value="suchen">
+
+            </form>
+
+
+            <a href="search.html?searchItem=Vegetarian">
+                <div>
+                    Vegetarisch geht`s hier lang!
+                </div>
+            </a>
+
         </div>
+
     </body>
 
 </html>
