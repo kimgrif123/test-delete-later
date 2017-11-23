@@ -1,3 +1,7 @@
 package kochbuch.project.kochbuch.Kochbuch;
 
-public interface RecipeRepository { }
+
+public interface RecipeRepository
+{
+
+}

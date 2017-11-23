@@ -18,4 +18,6 @@ public class RecipeSearchController
         }
         return "search"; //returning a view/template
     }
+
+
 }
