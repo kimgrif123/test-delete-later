@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kochbuch</title>
-    <link rel="stylesheet" type="text/css"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-</head>
-<body>
-<div class="container">
-    <div class="page-header">
-        <h1>Kochbuch</h1>
-    </div>
-</div>
-</body>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Kochbuch</title>
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    </head>
+
+    <body>
+        <div class="container">
+            <p class="page-header">
+                <h1>Kochbuch</h1>
+            <p> <a href="login.html">login</a></p>
+            <a href="registration.html">registrieren</a>
+
+
+            <form action="search.html" method="get">
+
+                Ich hab Lust auf...  <input type="text" name="searchItem">
+
+                <input type="submit" value="suchen">
+
+            </form>
+
+
+            <a href="search.html?searchItem=Vegetarian">
+                <div>
+                    Vegetarisch geht`s hier lang!
+                </div>
+            </a>
+
+        </div>
+
+    </body>
+
 </html>

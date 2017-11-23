@@ -1,9 +1,8 @@
 package kochbuch.project.kochbuch.Kochbuch;
 
-/**
- * Created by kgrif on 19.11.2017.
- */
-public class Ingredient {
+public class Ingredient
+{
+
     private double quantity;
     private String measure;
     private String name;
@@ -44,4 +43,6 @@ public class Ingredient {
     {
         this.measure = measure;
     }
+
 }
+
