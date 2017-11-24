@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<p> <a href="">Startseite</a></p>
 
+    <div class="container">
+
+        <form action="registration.html" method="get">
+
+            Vorname: <input type="text" name="fname"><br>
+            Nachname: <input type="text" name="lname"><br>
+            Passwort: <input type="password" name="pswd"><br>
+            Passwort wiederholen: <input type="password" name="wpswd"><br>
+
+            <p> <input type="submit" name="submit" value="bestätigen"></p>
+
+        </form>
+
+        <p th:text="${fname}" ></p>
+        <p th:text="${lname}" ></p>
+        <p th:text="${pswd}" ></p>
+        <p th:text="${wpswd}" ></p>
+
+    </div>
 </body>
 </html>
