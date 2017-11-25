@@ -1,10 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http:www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
-<p> <a href="">Startseite</a></p>
+
+<div layout:fragment="content">
+    <div class="page-header">
+        <h1>Login</h1>
+    </div>
+
+    <form action="/login" method="post" class="form-horizontal">
+        <div th:if="${param.error}" class="form-group">
+            <div class="col-sm-offset-2 col-sm-10 text-danger">
+                <strong>Login fehlgeschlagen</strong>
+            </div>
+        </div>
+
+        <div th:if="${param.logout}" class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <strong>Sie haben sich erfolgreich abgemeldet</strong>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputUsername" class="col-sm-2 control-label">Nutzername</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inputUsername" name="username" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">Passwort</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="inputPassword" name="password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a href="/" type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Anmelden
+                </a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <a href="/registration" type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
+                </a>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
 </body>
 </html>
