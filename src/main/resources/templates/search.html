@@ -1,13 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/XSL/Transform">
-    <head>
-        <meta charset="UTF-8">
-        <title>Rezepte</title>
-    </head>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/XSL/Transform"
+      xmlns:th="http:www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezepte</title>
+</head>
 
-    <body>
-        <h1>Rezeptesuche</h1>
-        <p th:text="${searchItem}" ></p>
-        <p> <a href="">Startseite</a></p>
-    </body>
+<body>
+
+<div class="page-header">
+    <div class="form-group">
+        <a href="index.html" class="btn btn-xs btn-link pull-left">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
+        </a>
+    </div>
+    <div class="form-group">
+        <form action="/registration" class="pull-right" method="post">
+            <a href="registration.html" class="btn btn-xs btn-link pull-right">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrieren
+            </a>
+        </form>
+        <form action="/login" class="pull-right" method="post">
+            <a href="login.html" class="btn btn-xs btn-link pull-right">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login
+            </a>
+        </form>
+    </div>
+    <div>
+        <form action="/logout" class="pull-right" method="post">
+            <a href="login.html" class="btn btn-xs btn-link">
+                <span class="glyphicon glyphicon-log-out" aria-hidden="true" th:text="${#httpServletRequest.remoteUser}"></span> abmelden
+            </a>
+        </form>
+        <a sec:authorize="hasRole('ADMIN')" href="/userSite" class="btn btn-xs btn-link pull-right">Nutzerverwaltung</a>
+    </div>
+    <h1>Rezepte</h1>
+</div>
+
+
+<form action="/search" method="get" class="form-inline" id="searchForm">
+    <div class="form-group">
+        <input name="suche" type="text" placeholder="Suchbegriff" class="form-control" th:text="${searchItem}"/>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>Suchen
+        </button>
+    </div>
+    <div class="form-group help">
+        <span>sucht nach Rezepten, die diesen Suchbegriff enthalten</span>
+    </div>
+</form>
+
+
+
+</body>
+
+
 </html>

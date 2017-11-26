@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:th="http:www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Registrierung</title>
 </head>
 <body>
-<p> <a href="">Startseite</a></p>
+
+<div class="page-header">
+    <a href="index.html" class="btn btn-xs btn-link pull-right">
+        <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
+    </a>
+    <h1>Registrierung</h1>
+</div>
 
     <div class="container">
 
         <form action="registration.html" method="get">
 
-            Vorname: <input type="text" name="fname"><br>
-            Nachname: <input type="text" name="lname"><br>
-            Passwort: <input type="password" name="pswd"><br>
-            Passwort wiederholen: <input type="password" name="wpswd"><br>
+            <label for="fname">Vorname:</label> <input type="text" name="fname" id="fname"><br>
+            <label for="lname">Nachname:</label> <input type="text" name="lname" id="lname"><br>
+            <label for="pswd">Passwort:</label> <input type="password" name="pswd" id="pswd"><br>
+            <label for="wpswd">Passwort wiederholen:</label> <input type="password" name="wpswd" id="wpswd"><br>
 
-            <p> <input type="submit" name="submit" value="bestätigen"></p>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <a href="/" type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
+                    </a>
+                </div>
+            </div>
 
         </form>
 
@@ -26,5 +41,6 @@
         <p th:text="${wpswd}" ></p>
 
     </div>
+
 </body>
 </html>
