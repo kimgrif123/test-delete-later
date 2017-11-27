@@ -37,7 +37,7 @@ public class User
         this.administrator = administrator;
     }
 
-    public long getid(){return id;}
+    public Long getid(){return id;}
 
     public String getFirstname()
     {

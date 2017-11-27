@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 @Transactional
 public class RecipeService
 {
-    /*
+
     private final RecipeRepository  recipeRepository;
 
 
@@ -16,7 +16,6 @@ public class RecipeService
     {
         this.recipeRepository = recipeRepository;
     }
-    */
     //Benötigte Methode für die Anzeige
 
     //TODO Search method                Input: String   Output: List of Recipe Obj

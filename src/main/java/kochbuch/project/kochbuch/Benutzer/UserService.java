@@ -4,45 +4,40 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
 public class UserService
 {
-/*
+
     private final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
+    @Transactional
     public void init() {
         if (userRepository.count() == 0) {
-            createUser(true, "Kim", "Griffith", "test");
-            createUser(true, "Nick", "Droegemueller", "test");
-            createUser(true, "Kai", "Okamoto", "test");
+            createUser("Kim", "Griffith", "test", true);
+            createUser("Nick", "Droegemueller", "test", true);
+            createUser("Kai", "Okamoto", "test", true);
 
         }
     }
 
     private void createUser(String fname, String lname, String pswd, Boolean admin) {
-        userRepository.save(new User(admin, fname,lname, pswd.encode(password)));
+        userRepository.save(new User(admin, fname,lname, pswd));
     }
 
     public List<User> findAll() {
         return userRepository.findAll();
     }
-
+/*
     public List<User> findUsers() {
         return userRepository.findUsers();
     }
- */
-    private void createUser(String fname, String lname, String pswd, Boolean admin)
-    {
-       new User(admin, fname,lname, pswd);
-    }
+*/
 }
