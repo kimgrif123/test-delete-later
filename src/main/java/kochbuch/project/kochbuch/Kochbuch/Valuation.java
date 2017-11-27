@@ -2,14 +2,24 @@ package kochbuch.project.kochbuch.Kochbuch;
 
 import kochbuch.project.kochbuch.Benutzer.User;
 
+import javax.persistence.*;
+
+@Entity
 public class Valuation
 {
+    @Id
+    @GeneratedValue
+    private long id;
+    @ManyToOne
+    private Recipe recipe;
     private Integer score;
     private String comment;
+    @OneToOne
     private User author;
 
-    public Valuation(Integer score, String comment, User author)
+    public Valuation(Recipe recipe, Integer score, String comment, User author)
     {
+        this.recipe = recipe;
         this.score = score;
         this.comment = comment;
         this.author = author;
@@ -24,6 +34,16 @@ public class Valuation
     {
         this.score = score;
     }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    public long getId(){return id;}
 
     public String getComment()
     {

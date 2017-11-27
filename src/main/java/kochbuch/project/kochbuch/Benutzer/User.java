@@ -3,8 +3,16 @@ package kochbuch.project.kochbuch.Benutzer;
 import kochbuch.project.kochbuch.Kochbuch.Recipe;
 import kochbuch.project.kochbuch.Kochbuch.Valuation;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class User
 {
+    @Id
+    @GeneratedValue
+    private Long id;
     private Boolean administrator;
 
     private String firstname;
@@ -28,6 +36,8 @@ public class User
     {
         this.administrator = administrator;
     }
+
+    public long getid(){return id;}
 
     public String getFirstname()
     {

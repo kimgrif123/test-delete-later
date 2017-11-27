@@ -2,14 +2,21 @@ package kochbuch.project.kochbuch.Kochbuch;
 
 import kochbuch.project.kochbuch.Benutzer.User;
 
+import javax.persistence.*;
 import java.lang.reflect.Field;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Recipe
 {
+    @Id
+    @GeneratedValue
+    private long id;
     private String name;
-    private ArrayList<Ingredient> ingredientList;
+    @OneToMany(orphanRemoval = true , mappedBy = "recipe")
+    private List<Ingredient>  ingredientList;
     private String cookingProcess;
     private double numberOfPeople;
 
@@ -17,9 +24,10 @@ public class Recipe
     private Duration duration;
     private Boolean released;
     private Boolean vegetarian;
-
-    private ArrayList<Valuation> valuationList;
+    @OneToMany(orphanRemoval = true , mappedBy = "recipe")
+    private List<Valuation> valuationList;
     private Double avgScore;
+    @OneToOne
     private User cook;
 
     public Recipe(User cook, String name)
@@ -44,6 +52,8 @@ public class Recipe
         this.cook = cook;
     }
 
+    public long getId(){return id;}
+
     public String getName() {
         return name;
     }
@@ -60,7 +70,7 @@ public class Recipe
         this.vegetarian = vegetarian;
     }
 
-    public ArrayList getIngredientList()
+    public List<Ingredient> getIngredientList()
     {
         return this.ingredientList;
     }
@@ -150,7 +160,7 @@ public class Recipe
         this.released = released;
     }
 
-    public ArrayList<Valuation> getValuationList()
+    public List<Valuation> getValuationList()
     {
         return this.valuationList;
     }
@@ -170,7 +180,7 @@ public class Recipe
 
     public Integer getSumOfValuationScores()
     {
-        ArrayList<Valuation> valList = this.getValuationList();
+        List<Valuation> valList = this.getValuationList();
 
         Integer sum = 0;
         for(Valuation v: valList)
@@ -204,7 +214,7 @@ public class Recipe
         this.avgScore = avgScore;
     }
 
-    public void setIngredientList (ArrayList<Ingredient> x)
+    public void setIngredientList (List<Ingredient> x)
     {
         this.ingredientList = x;
     }
@@ -216,7 +226,7 @@ public class Recipe
         Integer y = indi.getIngredientList().size();
         double multiply = m;
 
-        ArrayList<Ingredient> indiList = indi.getIngredientList();
+       List<Ingredient> indiList = indi.getIngredientList();
 
         for(Ingredient in: indiList)
         {
