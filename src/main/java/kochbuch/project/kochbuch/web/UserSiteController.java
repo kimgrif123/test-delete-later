@@ -11,4 +11,10 @@ public class UserSiteController
     {
         return "userSite";
     }
+
+
+    //TODO Input is the User ID (Given in REcipe & Comment Obj)
+    //TODO Call Repository for the Recipes
+    //TODO Call Repository for the Comments
+    //TODO Output the Recipe and Comments in the Model
 }

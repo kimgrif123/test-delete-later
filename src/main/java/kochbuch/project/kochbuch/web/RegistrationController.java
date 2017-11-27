@@ -13,6 +13,11 @@ public class RegistrationController
     {
         if(fname!=null && lname!=null && pswd!=null && wpswd!=null && pswd.equals(wpswd))
         {
+            //1. check if input is correct (if not handling the wrong input)
+            //2. by correct input call the service method "create user" which again calls the constructer of the User class.
+            //3. The service method saves the new User object in the DB.
+            //4. The systemuser gets a feedback regarding the successfull registration and can jump to the index
+            //(Index checks upon the new user id and enables the access to his usersite)
             System.out.println("test");
             model.addAttribute("fname",fname);
             model.addAttribute("lname",lname);
