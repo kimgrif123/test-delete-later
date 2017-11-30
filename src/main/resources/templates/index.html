@@ -16,6 +16,7 @@
                 <h1>Kochbuch</h1>
            <p> <a href="/login.html">Login</a></p>
             <p> <a href="/registration.html">Registrieren</a></p>
+            <p> <a href="/userSite.html">Meine Seite</a></p>
 
 
             <form action="search.html" method="get">
@@ -32,7 +33,10 @@
                     Vegetarisch geht`s hier lang!
                 </div>
             </a>
-
+            <br>
+            <ul>
+           <li th:each="user :${users}" th:text="${user.lastname}" ></li>
+            </ul>
         </div>
 
     </body>

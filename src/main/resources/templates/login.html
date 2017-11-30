@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <body>
-
-<div>
+<div layout:fragment="content">
     <div class="page-header">
         <h1>Login</h1>
     </div>
@@ -18,7 +15,7 @@
             </div>
         </div>
 
-        <div th:if="${param.logout}" class="form-group">
+        <div th:if="${param.logout}" class="form-group"-->
             <div class="col-sm-offset-2 col-sm-10">
                 <strong>Sie haben sich erfolgreich abgemeldet</strong>
             </div>
@@ -38,22 +35,11 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <a href="/search" type="submit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Anmelden
-                </a>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <a href="/registration" type="submit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
-                </a>
+                <button type="submit" class="btn btn-primary">Anmelden</button>
             </div>
         </div>
     </form>
 
 </div>
-
-
 </body>
 </html>

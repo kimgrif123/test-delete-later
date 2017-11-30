@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+>
 <head>
     <meta charset="UTF-8">
     <title>Registrierung</title>
@@ -17,25 +18,22 @@
 
         <form action="registration.html" method="get">
 
-            <label for="fname">Vorname:</label> <input type="text" name="fname" id="fname"><br>
-            <label for="lname">Nachname:</label> <input type="text" name="lname" id="lname"><br>
+            <label for="uname">Vorname:</label> <input type="text" name="uname" id="uname"><br>
             <label for="pswd">Passwort:</label> <input type="password" name="pswd" id="pswd"><br>
             <label for="wpswd">Passwort wiederholen:</label> <input type="password" name="wpswd" id="wpswd"><br>
 
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <a href="/" type="submit" class="btn btn-primary">
+                   <!--
+                    <a href="/registration" type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
                     </a>
+                    -->
+                    <button type="submit">Registrieren</button>
                 </div>
             </div>
 
         </form>
-
-        <p th:text="${fname}" ></p>
-        <p th:text="${lname}" ></p>
-        <p th:text="${pswd}" ></p>
-        <p th:text="${wpswd}" ></p>
 
     </div>
 
