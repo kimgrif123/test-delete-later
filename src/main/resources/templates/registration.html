@@ -31,22 +31,21 @@
             <label for="pswd">Passwort:</label> <input type="password" name="pswd" id="pswd"><br>
             <label for="wpswd">Passwort wiederholen:</label> <input type="password" name="wpswd" id="wpswd"><br>
 
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <a href="/" type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
-                    </a>
-                </div>
-            </div>
-
         </form>
+
+    </div>
+
+    <div class="container">
+        <a href="/" type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
+        </a>
+    </div>
+
 
         <p th:text="${fname}" ></p>
         <p th:text="${lname}" ></p>
         <p th:text="${pswd}" ></p>
         <p th:text="${wpswd}" ></p>
-
-    </div>
 
 </div>
 
