@@ -1,5 +1,6 @@
 package kochbuch.project.kochbuch.Benutzer;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -12,32 +13,37 @@ public class UserService
 {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
     @Transactional
     public void init() {
         if (userRepository.count() == 0) {
-            createUser("Kim", "Griffith", "test", true);
-            createUser("Nick", "Droegemueller", "test", true);
-            createUser("Kai", "Okamoto", "test", true);
+            createUser("Kim", "test", "ADMIN");
+            createUser("Nick",  "test", "ADMIN");
+            createUser("Kai", "test", "ADMIN");
 
+            System.out.println(userRepository.count());
         }
     }
 
-    private void createUser(String fname, String lname, String pswd, Boolean admin) {
-        userRepository.save(new User(admin, fname,lname, pswd));
+    public void createUser(String uname, String pswd, String role) {
+        userRepository.save(new User(role, uname, passwordEncoder.encode(pswd)));
     }
 
     public List<User> findAll() {
         return userRepository.findAll();
     }
-/*
-    public List<User> findUsers() {
-        return userRepository.findUsers();
+
+    public List<User> findAdmins() {
+        return userRepository.findAdmins();
     }
-*/
+
+    public User findUserByName(String username){return userRepository.findByName(username);}
+
 }

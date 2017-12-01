@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +7,10 @@
 </head>
 <body>
 <p> <a href="">Startseite</a></p>
+
+<p th:text="${user.role}" ></p>
+<p th:text="${user.username}" ></p>
+<p th:text="${user.password}" ></p>
 
 
 <!--Input the Output of the Model in onclick actions or form actions to give the controller a Id to work with back-->

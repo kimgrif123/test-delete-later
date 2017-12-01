@@ -3,60 +3,53 @@ package kochbuch.project.kochbuch.Benutzer;
 import kochbuch.project.kochbuch.Kochbuch.Recipe;
 import kochbuch.project.kochbuch.Kochbuch.Valuation;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User
 {
+
     @Id
     @GeneratedValue
-    private Long id;
-    private Boolean administrator;
-
-    private String firstname;
-    private String lastname;
+    private int id;
+    private String role;
+    @Column(unique = true)
+    private String username;
     private String password;
 
-    public User(Boolean administrator, String firstname, String lastname, String password)
+
+    public User (){}
+
+    public User(String role, String username, String password)
     {
-        this.administrator = administrator;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.role = role;
+        this.username = username;
         this.password = password;
+
     }
 
-    public Boolean getAdministrator()
+    public String getRole()
     {
-        return administrator;
+        return role;
     }
 
-    public void setAdministrator(Boolean administrator)
+    public void setRole(String role)
     {
-        this.administrator = administrator;
+        this.role = role;
     }
 
-    public Long getid(){return id;}
+    public int getid(){return id;}
 
-    public String getFirstname()
+    public void setid(int id){this.id = id;}
+
+    public String getUsername()
     {
-        return firstname;
+        return username;
     }
 
-    public void setFirstname(String firstname)
+    public void setUsername(String username)
     {
-        this.firstname = firstname;
-    }
-
-    public String getLastname()
-    {
-        return lastname;
-    }
-
-    public void setLastname(String lastname)
-    {
-        this.lastname = lastname;
+        this.username = username;
     }
 
     public String getPassword()
@@ -71,7 +64,7 @@ public class User
 
     public void deleteRecipe(Recipe r)
     {
-        if(r.getCook().equals(this)|| this.getAdministrator())
+        if(r.getCook().equals(this)|| this.getRole() == "ADMIN")
         {
             r.setCook(null);
         }
@@ -82,7 +75,7 @@ public class User
     }
     public void deleteValuation(Recipe x, Valuation v)
     {
-        if(v.getAuthor().equals(this) || this.getAdministrator())
+        if(v.getAuthor().equals(this) || this.getRole()=="ADMIN")
         {
             x.getValuationList().remove(v);
             x.calcAvgScore();

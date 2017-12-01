@@ -1,86 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Kochbuch</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Kochbuch</title>
+        <link rel="stylesheet" type="text/css"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    </head>
 
-<body>
+    <body>
+    <!--mlns:th="http:www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}"-->
+        <div class="container">
+            <p class="page-header">
+                <h1>Kochbuch</h1>
+           <p> <a href="/login.html">Login</a></p>
 
-<div class="page-header">
-    <div class="container">
-        <div class="btn-group pull-right">
-            <a href="login.html" type="submit" class="btn btn-primary">
-                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login
+            <form action="/logout" class="pull-right" method="post">
+                <button type="submit" class="btn btn-xs btn-link">
+                    <span th:text="${#httpServletRequest.remoteUser}" />
+                    abmelden
+                </button>
+            </form>
+            <p> <a href="/registration.html">Registrieren</a></p>
+            <p> <a href="/userSite.html">Meine Seite</a></p>
+
+
+            <form action="search.html" method="get">
+
+                Ich hab Lust auf...  <input type="text" name="searchItem">
+
+                <input type="submit" value="suchen">
+
+            </form>
+
+
+            <a href="search.html?searchItem=Vegetarian">
+                <div>
+                    Vegetarisch geht`s hier lang!
+                </div>
             </a>
-            <a href="registration.html" type="submit" class="btn btn-primary">
-                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrieren
-            </a>
+            <br>
+            <ul>
+           <li th:each="user :${users}" th:text="${user.lastname}" ></li>
+            </ul>
         </div>
-    </div>
-    <h1>Kochbuch Homepage</h1>
-</div>
 
-
-<div class="col-md-6">
-    <form action="/search" method="get" class="form-horizontal">
-        <div class="form-group">
-            <label for="inputSearch"> Ich habe Lust auf... </label>
-            <input type="text" class="form-control" id="inputSearch" name="search" style="width:90%" />
-            <div class="col-md">
-                <section>
-                    <img class="slideshow" src="https://atmedia.imgix.net/5cdc344761c20615ed0543f9615fdda8f169cae3?auto=format&q=45&w=640.0&h=430.0&fit=max&cs=strip"
-                         style="width:90%">
-                    <img class="slideshow" src="http://www.seriouseats.com/recipes/assets_c/2017/03/20170210-chicken-massaman-emily-matt-clifton-4-thumb-1500xauto-436790.jpg"
-                         style="width:90%">
-                    <img class="slideshow" src="http://img1.cookinglight.timeinc.net/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/2017/09/main/autumn-glow-salad-1711p85.jpg?itok=xsUVd68s"
-                         style="width:90%">
-                </section>
-
-                <script>
-                        // Automatic Slideshow - change image every 3 seconds
-                        var myIndex = 0;
-                        carousel();
-
-                        function carousel() {
-                            var i;
-                            var x = document.getElementsByClassName("slideshow");
-                            for (i = 0; i < x.length; i++) {
-                                x[i].style.display = "none";
-                            }
-                            myIndex++;
-                            if (myIndex > x.length) {myIndex = 1}
-                            x[myIndex-1].style.display = "block";
-                            setTimeout(carousel, 3000);
-                        }
-                </script>
-
-            </div>
-
-                <a href="search.html" type="submit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Alle Rezepte durchsuchen
-                </a>
-
-        </div>
-    </form>
-</div>
-
-<div class="col-md-6">
-    <form action="/search" method="get" class="form-horizontal">
-        <div class="form-group">
-            <label for="vegSearch"> Oder vielleicht vegetarisch? </label>
-            <input type="text" class="form-control" id="vegSearch" name="search" style="width:90%" />
-            <img src="http://www.lecker.de/assets/field/image/griechischer-salat_0.jpg" style="width:90%">
-            <a href="search.html?searchItem=Vegetarian" type="submit" class="btn btn-primary">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Vegetarisch durchsuchen
-            </a>
-        </div>
-    </form>
-</div>
-
-</body>
+    </body>
 
 </html>

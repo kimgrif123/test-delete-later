@@ -106,9 +106,8 @@ public class Recipe
 
     public void printCook() throws IllegalAccessException
     {
-        String fn = this.getCook().getFirstname();
-        String ln = this.getCook().getLastname();
-        System.out.println("Koch: "+fn+" "+ln);
+        String un = this.getCook().getUsername();
+        System.out.println("Koch: "+un);
     }
     public String getCookingProcess()
     {
