@@ -23,7 +23,10 @@ public class UserAdapter implements UserDetails
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
     }
 
-    public String getPassword() { return user.getPassword();}
+    public String getPassword()
+    {
+        return user.getPassword();
+    }
     public String getUsername() {return user.getUsername();}
 
     @Override

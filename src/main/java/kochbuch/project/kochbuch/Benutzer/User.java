@@ -3,20 +3,20 @@ package kochbuch.project.kochbuch.Benutzer;
 import kochbuch.project.kochbuch.Kochbuch.Recipe;
 import kochbuch.project.kochbuch.Kochbuch.Valuation;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User
 {
+
     @Id
     @GeneratedValue
-    private Long id;
+    private int id;
     private String role;
-
+    @Column(unique = true)
     private String username;
     private String password;
+
 
     public User (){}
 
@@ -25,6 +25,7 @@ public class User
         this.role = role;
         this.username = username;
         this.password = password;
+
     }
 
     public String getRole()
@@ -37,7 +38,9 @@ public class User
         this.role = role;
     }
 
-    public Long getid(){return id;}
+    public int getid(){return id;}
+
+    public void setid(int id){this.id = id;}
 
     public String getUsername()
     {

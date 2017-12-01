@@ -15,6 +15,13 @@
             <p class="page-header">
                 <h1>Kochbuch</h1>
            <p> <a href="/login.html">Login</a></p>
+
+            <form action="/logout" class="pull-right" method="post">
+                <button type="submit" class="btn btn-xs btn-link">
+                    <span th:text="${#httpServletRequest.remoteUser}" />
+                    abmelden
+                </button>
+            </form>
             <p> <a href="/registration.html">Registrieren</a></p>
             <p> <a href="/userSite.html">Meine Seite</a></p>
 

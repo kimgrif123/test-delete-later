@@ -1,6 +1,10 @@
 package kochbuch.project.kochbuch.web;
 
 import kochbuch.project.kochbuch.Benutzer.UserService;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,9 @@ public class RegistrationController
     @RequestMapping(value="/registration")
     String registration(@RequestParam(value = "uname", required = false) String uname, @RequestParam(value = "pswd", required = false) String pswd,@RequestParam(value = "wpswd", required = false) String wpswd, Model model)
     {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+
         if(uname!=null && pswd!=null && wpswd!=null && pswd.equals(wpswd))
         {
             //1. check if input is correct (if not handling the wrong input)
@@ -27,13 +34,15 @@ public class RegistrationController
             //(Index checks upon the new user id and enables the access to his usersite)
 
             userService.createUser(uname,pswd,"USER");
-
-            return "registration";
+            return "index";
         }
 
         else
         {
-            return "registration";
+            if(auth.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))) { return "registration";}
+            else {  return "redirect:/";}
+
         }
     }
 }
+
