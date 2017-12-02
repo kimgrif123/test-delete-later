@@ -1,41 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Registrierung</title>
 </head>
+
 <body>
 
 <div class="page-header">
-    <a href="" class="btn btn-xs btn-link pull-right">
-        <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
-    </a>
+    <div class="container">
+        <div class="btn-group pull-right">
+            <a href="/" class="btn btn-primary">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
+            </a>
+        </div>
+    </div>
     <h1>Registrierung</h1>
 </div>
 
-    <div class="container">
+<div class="container">
 
-        <form action="registration.html" method="get">
+    <form action="registration.html" method="get">
 
-            <label for="uname">Vorname:</label> <input type="text" name="uname" id="uname"><br>
-            <label for="pswd">Passwort:</label> <input type="password" name="pswd" id="pswd"><br>
-            <label for="wpswd">Passwort wiederholen:</label> <input type="password" name="wpswd" id="wpswd"><br>
+        <label for="uname">Username:</label> <input type="text" name="uname" id="uname"><br>
+        <label for="pswd">Passwort:</label> <input type="password" name="pswd" id="pswd"><br>
+        <label for="wpswd">Passwort wiederholen:</label> <input type="password" name="wpswd" id="wpswd"><br>
 
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                   <!--
-                    <a href="/registration" type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
-                    </a>
-                    -->
-                    <button type="submit">Registrieren</button>
-                </div>
-            </div>
+    </form>
 
-        </form>
+</div>
 
-    </div>
+<div class="container">
+    <a href="/" type="submit" class="btn btn-primary">
+        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
+    </a>
+</div>
+
 
 </body>
 </html>

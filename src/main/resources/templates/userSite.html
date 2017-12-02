@@ -3,10 +3,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Meine Seite</title>
 </head>
 <body>
-<p> <a href="">Startseite</a></p>
+
+
+<div class="page-header">
+    <div class="container">
+        <div class="btn-group pull-right">
+            <a href="/" type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
+            </a>
+        </div>
+    </div>
+    <h1>Meine Seite</h1>
+</div>
+
+
+<h1>Title of Recipe</h1>
+
+<h3>Ingredients:</h3>
+
+<ul>
+    <li>Ingredient 1</li>
+    <li>Ingredient 2</li>
+    <li>Ingredient 3</li>
+</ul>
+
+<h3>Instructions:</h3>
+
+<ol>
+    <li>Step 1</li>
+    <li>Step 2</li>
+    <li>Step 3</li>
+</ol>
+
 
 <p th:text="${user.role}" ></p>
 <p th:text="${user.username}" ></p>
@@ -14,6 +48,6 @@
 
 
 <!--Input the Output of the Model in onclick actions or form actions to give the controller a Id to work with back-->
-<!--Its important to dvide the presentation of Resipes and comments. Multi array in the model? -->
+<!--Its important to divide the presentation of Recipes and comments. Multi array in the model? -->
 </body>
 </html>
