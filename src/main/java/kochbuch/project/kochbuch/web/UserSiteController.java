@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 @Controller
 public class UserSiteController
 {
@@ -20,13 +19,11 @@ public class UserSiteController
     {
         //gives user name
         model.addAttribute("user", userService.findUserByName(SecurityContextHolder.getContext().getAuthentication().getName()));
-
+        model.addAttribute ("userid",(userService.findUserByName(SecurityContextHolder.getContext().getAuthentication().getName()).getid()));
        // userService.findUserByName(SecurityContextHolder.getContext().getAuthentication().getName());
 
         return "userSite";
     }
-
-
 
     //TODO Input is the User ID (Given in REcipe & Comment Obj)
     //TODO Call Repository for the Recipes
