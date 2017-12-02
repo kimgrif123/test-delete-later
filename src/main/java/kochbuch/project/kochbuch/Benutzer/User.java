@@ -10,8 +10,8 @@ public class User
 {
 
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String role;
     @Column(unique = true)
     private String username;
@@ -38,9 +38,9 @@ public class User
         this.role = role;
     }
 
-    public int getid(){return id;}
+    public Long getid(){return id;}
 
-    public void setid(int id){this.id = id;}
+    public void setid(Long id){this.id = id;}
 
     public String getUsername()
     {
