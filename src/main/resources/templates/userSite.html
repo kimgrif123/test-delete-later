@@ -7,35 +7,59 @@
     <title>Title</title>
 </head>
 <body>
-<p> <a href="">Startseite</a></p>
+<p> <a href="/">Startseite</a></p>
 
-<p id="koala" th:text="${user.role}" ></p>
-<p th:text="${user.username}" ></p>
-<p th:text="${user.password}" ></p>
-<p th:text="${userid}" ></p>
+<form id="recipe" name="recipe" action="userSite.html" method="get">
 
-<form id="recipe" action="userSite.html" method="get">
-
-Name: <input type="text" name="rname" ><br>
+Name: <input type="text" name="rname"  th:value="${newR?.name}"><br>
 Dauer: <input type="number" name="duration" > Minuten<br>
-Schwierigkeitsgrad: <input type="text" name="difficulty" ><br>
-Freigabe: <input type="checkbox" name="released" ><br>
-Personenanzahl: <input type="number" name="pplnr" ><br>
-Vegetarisch: <input type="checkbox" name="veggie" ><br>
+    <!--TODO How do i get to show the duration Kim -->
+Schwierigkeitsgrad: <input type="text" name="difficulty"  th:value="${newR?.difficulty}"><br>
+Freigabe: <input type="checkbox" name="released" default="false" th:value="${newR?.released}"><br>
+Personenanzahl: <input type="number" name="pplnr"  th:value="${newR?.numberOfPeople}"><br>
+Vegetarisch: <input type="checkbox" name="veggie" default="false"  th:value="${newR?.vegetarian}"><br>
 
-Kochprozess: <input type="text" name="cprocess" ><br>
-
-<button type="submit">Rezept erstellen</button>
-
-Zutat: <div class="ingredient"> Menge: <input id="1" type="number" name="innr"> Einheit: <input id="2" type="text" name="inun"><br></div>
-
-    <p><button type="button" onclick='addIngredient()'>Add</button></p>
+Kochprozess: <input type="text" name="cprocess"  th:value="${newR?.cookingProcess}"><br>
+    <input type="hidden" value="test" th:value="${newRid}" name="newRid">
+<button type="submit" form="recipe">Rezept erstellen</button>
 </form>
+    <form action="userSite.html" method="get">
+    Zutat: <div class="ingredient">Name: <input type="String" name="inna"> Menge: <input type="number" name="innr"> Einheit: <input type="text" name="inun"><br></div>
+       <input type="hidden" value="test" th:value="${newRid}" name="newRid">
+        <p><button type="submit">Hinzufügen</button></p>
+    </form>
+Koch:
+<b th:text="${newR?.cook?.username}"></b><br>
+Rezept:
+<b th:text="${newR?.name}"></b><br>
+Personenanzahl:
+<b th:text="${newR?.numberOfPeople}"></b><br>
+Schwierigkeitsstufe:
+<b th:text="${newR?.difficulty}"></b><br>
+Dauer:
+<b th:text="${newR?.duration}"></b><br>
+Vegetarisch:
+<b th:text="${newR?.vegetarian}"></b><br>
+Zubereitung:
+<b th:text="${newR?.cookingProcess}"></b><br>
+Freigegeben:
+<b th:text="${newR?.released}"></b><br>
 
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Menge</th>
+        <th>Einheit</th>
+    </tr>
+    <tr th:each="in : ${newRiL}" >
+        <td th:text="${in.name}"> </td>
+        <td th:text="${in.quantity}"> </td>
+        <td th:text="${in.measure}"> </td>
+        <td><form action="userSite.html" method="get"> <input type="hidden" value="test" th:value="${newRid}" name="newRid"> <input type="hidden" name="delete" value="" th:value="${in.id}"><button type="submit">Entfernen</button></form></td>
+    </tr>
+</table>
 
-
-
-
+ <!-- TODO check th syntax ! not working ... -->
 
 
 <!--Input the Output of the Model in onclick actions or form actions to give the controller a Id to work with back-->

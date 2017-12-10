@@ -15,22 +15,22 @@ public class Recipe
     @GeneratedValue
     private long id;
     private String name;
-    @OneToMany(orphanRemoval = true , mappedBy = "recipe")
+    @OneToMany(orphanRemoval = false , mappedBy = "recipe")
     private List<Ingredient>  ingredientList;
     private String cookingProcess;
-    private double numberOfPeople;
+    private Double numberOfPeople;
 
     private Integer difficulty;
     private Duration duration;
     private Boolean released;
     private Boolean vegetarian;
-    @OneToMany(orphanRemoval = true , mappedBy = "recipe")
+    @OneToMany(orphanRemoval = false , mappedBy = "recipe")
     private List<Valuation> valuationList;
     private Double avgScore;
     @OneToOne
     private User cook;
 
-    public Recipe(User cook, String name)
+    public Recipe(User cook)
     {
         this.valuationList = new ArrayList<Valuation>();
         this.ingredientList = new ArrayList<Ingredient>();
@@ -39,7 +39,18 @@ public class Recipe
         this.released = false;
         this.vegetarian = false;
         this.setCook(cook);
-        this.setName(name);
+    }
+
+    public Recipe (User cook, String name)
+    {
+        this.valuationList = new ArrayList<Valuation>();
+        this.ingredientList = new ArrayList<Ingredient>();
+        this.cookingProcess = new String();
+        this.duration = Duration.ofMinutes(0);
+        this.released = false;
+        this.vegetarian = false;
+        this.setCook(cook);
+        this.name = name;
     }
 
     public User getCook()
@@ -72,7 +83,10 @@ public class Recipe
 
     public List<Ingredient> getIngredientList()
     {
-        return this.ingredientList;
+        if (ingredientList == null) {
+            ingredientList = new ArrayList<>();
+        }
+        return ingredientList;
     }
 
     public void addIngredientToList(Ingredient c)
@@ -119,12 +133,12 @@ public class Recipe
         this.cookingProcess = cookingProcess;
     }
 
-    public double getNumberOfPeople()
+    public Double getNumberOfPeople()
     {
         return this.numberOfPeople;
     }
 
-    public void setNumberOfPeople(double numberOfPeople)
+    public void setNumberOfPeople(Double numberOfPeople)
     {
         this.numberOfPeople = numberOfPeople;
     }
@@ -252,7 +266,7 @@ public class Recipe
     @Override
     public Recipe clone()
     {
-        Recipe x = new Recipe(null,"");
+        Recipe x = new Recipe(null);
 
         x.cook = this.getCook();
         x.avgScore = this.getAvgScore();
@@ -267,5 +281,6 @@ public class Recipe
 
         return x;
     }
+    public Recipe(){}
 
 }
