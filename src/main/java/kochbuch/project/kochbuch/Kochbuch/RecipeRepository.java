@@ -14,7 +14,7 @@ public interface RecipeRepository extends JpaRepository<Recipe,Long>
     @Query("select r from Recipe r where r.id = :id")
     Recipe findByIdRecipe(@Param("id") Long id);
 
-    @Query("select r from Recipe r where r.name is null")
+    @Query("select r from Recipe r where r.difficulty is null")
     Recipe findNewRecipe();
 
     @Query("select r from Recipe r where r.name = :name")

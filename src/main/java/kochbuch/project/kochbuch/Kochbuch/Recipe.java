@@ -15,13 +15,13 @@ public class Recipe
     @GeneratedValue
     private long id;
     private String name;
-    @OneToMany(orphanRemoval = false , mappedBy = "recipe")
+    @OneToMany(orphanRemoval = true, mappedBy = "recipe")
     private List<Ingredient>  ingredientList;
     private String cookingProcess;
     private Double numberOfPeople;
 
     private Integer difficulty;
-    private Duration duration;
+    private Integer duration;
     private Boolean released;
     private Boolean vegetarian;
     @OneToMany(orphanRemoval = false , mappedBy = "recipe")
@@ -34,8 +34,10 @@ public class Recipe
     {
         this.valuationList = new ArrayList<Valuation>();
         this.ingredientList = new ArrayList<Ingredient>();
+        this.name = new String();
         this.cookingProcess = new String();
-        this.duration = Duration.ofMinutes(0);
+        this.numberOfPeople = null;
+        this.duration = null;
         this.released = false;
         this.vegetarian = false;
         this.setCook(cook);
@@ -46,7 +48,7 @@ public class Recipe
         this.valuationList = new ArrayList<Valuation>();
         this.ingredientList = new ArrayList<Ingredient>();
         this.cookingProcess = new String();
-        this.duration = Duration.ofMinutes(0);
+        this.duration = null;
         this.released = false;
         this.vegetarian = false;
         this.setCook(cook);
@@ -153,14 +155,20 @@ public class Recipe
         this.difficulty = difficulty;
     }
 
-    public Duration getDuration()
+    public Integer getDuration()
     {
         return this.duration;
     }
-
+/*
+Trouble resolving with Thymeleaf -> workaround Typ Integer (Kannziel: Typ Duration)
     public void setDuration(Integer x)
     {
         this.duration = this.duration.ofMinutes(x);
+    }
+*/
+    public void setDuration(Integer duration)
+    {
+        this.duration = duration;
     }
 
     public Boolean getReleased()

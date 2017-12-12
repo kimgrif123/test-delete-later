@@ -39,18 +39,15 @@ public class RecipeService
         if (recipeRepository.count() == 0)
         {
             createRecipeWithName(userService.findUserByName("Kai"),"Bratkartoffeln");
+
             ingredientService.createIngredient(findByNameRecipe("Bratkartoffeln"),"Kartoffeln",1.00,"kg");
             ingredientService.createIngredient(findByNameRecipe("Bratkartoffeln"),"Öl",20.00,"ml");
-            updateIngredientList(findByNameRecipe("Bratkartoffeln").getId(),ingredientService.findIngredientByRecipe(findByNameRecipe("Bratkartoffeln")));
-            updateCookingProcess(findByNameRecipe("Bratkartoffeln").getId(),"Kartoffeln schnippeln und braten");
-            updateNumberOfPeople(findByNameRecipe("Bratkartoffeln").getId(),1.00);
-            updateDifficulty(findByNameRecipe("Bratkartoffeln").getId(),1);
-            updateDuration(findByNameRecipe("Bratkartoffeln").getId(),15);
-            updateVegetarian(findByNameRecipe("Bratkartoffeln").getId(),Boolean.TRUE);
-            updateReleased(findByNameRecipe("Bratkartoffeln").getId(),Boolean.TRUE);
+
+            Recipe x = findByNameRecipe("Bratkartoffeln");
+            x.setIngredientList(ingredientService.findIngredientByRecipe(findByNameRecipe("Bratkartoffeln")));
+            updateRecipe(x.getId(),"Bratkartoffeln","Kartoffeln schnippeln und braten",2,15,1.00,"true","true");
         }
     }
-
 
 
     public void createRecipeWithName(User cook, String name) {
@@ -78,18 +75,75 @@ public class RecipeService
 
     public Recipe findByNameRecipe(String name) {return recipeRepository.findByNameRecipe(name);}
 
-    public void updateIngredientList(Long id, List<Ingredient> ingredientList) { findByIdRecipe(id).setIngredientList(ingredientList); }
-    public void updateName(Long id, String name){findByIdRecipe(id).setName(name);}
-    public void updateCookingProcess (Long id, String cprocess){findByIdRecipe(id).setCookingProcess(cprocess);}
-    public void updateDifficulty(Long id, Integer diff){findByIdRecipe(id).setDifficulty(diff);}
-    public void updateDuration (Long id, Integer duration){findByIdRecipe(id).setDuration(duration);}
-    public void updateNumberOfPeople(Long id, Double nrOfPpl){findByIdRecipe(id).setNumberOfPeople(nrOfPpl);}
-    public void updateReleased (Long id, Boolean released){if(released == true){findByIdRecipe(id).setReleased(true);}else{findByIdRecipe(id).setReleased(false);}}
-    public void updateVegetarian (Long id, Boolean veggie){if(veggie == true){findByIdRecipe(id).setVegetarian(true);}else{findByIdRecipe(id).setVegetarian(false);}}
-
-    public void removeIngredient(Long rId, Long iId)
+    public List<Recipe> findRecipeByCook(User user)
     {
-        findByIdRecipe(rId).removeIngredient(ingredientService.findIngredientById(iId));
+        List<Recipe> allRecipes =  (recipeRepository.findAll());
+        List<Recipe> userRecipes = new ArrayList<Recipe>();
+
+        for (Recipe recipe: allRecipes)
+        {
+            if(recipe.getCook().equals(user))
+            {
+                userRecipes.add(recipe);
+            }
+        }
+        return userRecipes;
     }
 
+    public void addIngredientToList(Long newRid, String name, Double quantity, String measure)
+    {
+        Ingredient i =  ingredientService.createIngredient(findByIdRecipe(newRid),name,quantity,measure);
+
+        Recipe r = findByIdRecipe(newRid);
+
+        r.addIngredientToList(i);
+
+        saveRecipe(r);
+    }
+
+    public void updateRecipe(Long id, String name, String cprocess, Integer diff, Integer duration, Double nrOfPpl, String released, String veggie)
+    {
+        Recipe r = findByIdRecipe(id);
+        r.setName(name);
+        r.setCookingProcess(cprocess);
+        r.setDifficulty(diff);
+        r.setNumberOfPeople(nrOfPpl);
+        r.setDuration(duration);
+
+        if(released != null)
+        {
+            r.setReleased(true);
+        }
+        else
+        {
+            r.setReleased(false);
+        }
+        if(veggie != null)
+        {
+            r.setVegetarian(true);
+        }
+        else
+        {
+            r.setVegetarian(false);
+        }
+        saveRecipe(r);
+    }
+    public void removeIngredient(Long rId, Long delete)
+    {
+
+        Recipe x = findByIdRecipe(rId);
+        Ingredient i = ingredientService.findIngredientById(delete);
+
+        x.removeIngredient(i);
+
+        saveRecipe(x);
+        ingredientService.deleteIngredient(ingredientService.findIngredientById(delete));
+    }
+
+    public void deleteRecipe (Long id)
+    {
+        Recipe r = findByIdRecipe(id);
+        recipeRepository.delete(r.getId());
+
+    }
 }

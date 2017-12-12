@@ -1,18 +1,27 @@
-function addIngredient()
+function validateRecipeForm()
 {
-    var previnput = document.getElementsByClassName("ingredient").lastChild;
-    var prevId = previnput.attributes.id;
-    console.log(prevId);
-    var newId = prevId + 1;
-    var input = document.createElement("input");
+    var a =document.forms["recipe"]["rname"].value;
+    var b =document.forms["recipe"]["duration"].value;
+    var c =document.forms["recipe"]["difficulty"].value;
+    var d =document.forms["recipe"]["pplnr"].value;
+    var e =document.forms["recipe"]["cprocess"].value;
 
-        input.setAttribute("type", "number");
+    if (a==null || a=="" || b==null || b == ""|| c==null || c=="" || d==null || d==""|| e==null || e=="")
+    {
+        alert("Bitte alle Pflichtfelder füllen!");
+        return false;
+    }
+}
 
+function validateIngredientForm()
+{
+    var f =document.forms["ingredient"]["inna"].value;
+    var g =document.forms["ingredient"]["innr"].value;
+    var h =document.forms["ingredient"]["inun"].value;
 
-    var para  =   document.createElement("p");
-    var Menge = document.createTextNode("Menge: ");
-    var element = document.getElementById("recipe");
-    element.appendChild(para);
-    para.appendChild(Menge);
-    para.appendChild(input);
+    if (f==null || f=="" || g==null || g == ""|| h==null || h=="")
+    {
+        alert("Bitte alle Pflichtfelder füllen!");
+        return false;
+    }
 }

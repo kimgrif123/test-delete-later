@@ -19,7 +19,9 @@ public class IngredientService
         this.ingredientRepository = ingredientRepository;
     }
 
-    public void createIngredient(Recipe recipe, String name, Double quantity, String measure){ingredientRepository.save(new Ingredient(recipe, name, quantity, measure));}
+    //public void createIngredient(Recipe recipe, String name, Double quantity, String measure){ingredientRepository.save(new Ingredient(recipe, name, quantity, measure));}
+
+    public Ingredient createIngredient(Recipe recipe, String name, Double quantity, String measure){Ingredient i = new Ingredient(recipe, name, quantity, measure); ingredientRepository.save(i); return i;}
 
     public List <Ingredient> findIngredientByRecipe(Recipe recipe){return ingredientRepository.findIngredientByRecipe(recipe);}
 
