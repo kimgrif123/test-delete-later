@@ -8,7 +8,14 @@
 </head>
 
 <body>
-
+Suchergebnisse:</br>
+<ul th:each="searchResult: ${searchResults}">
+    <li>
+        <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}"><b th:text="${searchResult?.name}"></b>
+            <button value="show" name="show" type="submit">Anzeigen</button>
+        </form>
+    </li>
+</ul>
 </body>
 
 

@@ -24,7 +24,7 @@ public class Recipe
     private Integer duration;
     private Boolean released;
     private Boolean vegetarian;
-    @OneToMany(orphanRemoval = false , mappedBy = "recipe")
+    @OneToMany(orphanRemoval = true , mappedBy = "recipe")
     private List<Valuation> valuationList;
     private Double avgScore;
     @OneToOne
@@ -101,6 +101,11 @@ public class Recipe
         this.ingredientList.remove(c);
     }
 
+    public void addValuationToList(Valuation v)
+    {
+        this.valuationList.add(v);
+    }
+
     public void printIngredientList() throws IllegalAccessException
     {
         for (Object x : this.getIngredientList())
@@ -159,13 +164,7 @@ public class Recipe
     {
         return this.duration;
     }
-/*
-Trouble resolving with Thymeleaf -> workaround Typ Integer (Kannziel: Typ Duration)
-    public void setDuration(Integer x)
-    {
-        this.duration = this.duration.ofMinutes(x);
-    }
-*/
+
     public void setDuration(Integer duration)
     {
         this.duration = duration;
@@ -188,7 +187,6 @@ Trouble resolving with Thymeleaf -> workaround Typ Integer (Kannziel: Typ Durati
 
     public void setValuationList(Valuation v)
     {
-        this.valuationList.remove(v);
         this.valuationList.add(v);
         this.calcAvgScore();
     }
@@ -275,8 +273,9 @@ Trouble resolving with Thymeleaf -> workaround Typ Integer (Kannziel: Typ Durati
     public Recipe clone()
     {
         Recipe x = new Recipe(null);
-
+        //x.id   = this.getId();
         x.cook = this.getCook();
+        x.name = this.getName();
         x.avgScore = this.getAvgScore();
         x.cookingProcess = this.getCookingProcess();
         x.difficulty = this.getDifficulty();

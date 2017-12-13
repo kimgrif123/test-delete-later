@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/js/Application.js"></script>
         <title>Kochbuch</title>
     </head>
 
@@ -13,16 +14,18 @@
     <div class="page-header">
         <div class="container">
             <div class="btn-group pull-right">
-                <a href="login.html" class="btn btn-primary">
+                <a href="login.html" class="btn btn-primary"th:if="${#httpServletRequest.remoteUser} == null">
                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login
                 </a>
+                <!--
                 <a href="registration.html" class="btn btn-primary">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrieren
                 </a>
+                -->
                 <a href="userSite.html" class="btn btn-primary">
                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Meine Seite
                 </a>
-                <form action="/logout" class="pull-right" method="post">
+                <form action="/logout" class="pull-right" method="post" th:if="${#httpServletRequest.remoteUser} != null">
                     <button type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-log-out" aria-hidden="true" th:text="${#httpServletRequest.remoteUser}"> </span>
                         abmelden
@@ -37,7 +40,7 @@
         <form action="search.html" method="get" class="form-horizontal">
             <div class="form-group">
                 <label for="inputSearch"> Ich habe Lust auf... </label>
-                <input type="text" class="form-control" id="inputSearch" name="searchItem" style="width:90%" />
+                <input type="text" class="form-control" id="inputSearch" name="search" style="width:90%" />
                 <div class="col-md">
                     <section>
                         <img class="slideshow" src="https://atmedia.imgix.net/5cdc344761c20615ed0543f9615fdda8f169cae3?auto=format&q=45&w=640.0&h=430.0&fit=max&cs=strip"
@@ -49,29 +52,15 @@
                     </section>
 
                     <script>
-                        // Automatic Slideshow - change image every 3 seconds
                         var myIndex = 0;
                         carousel();
-
-                        function carousel() {
-                            var i;
-                            var x = document.getElementsByClassName("slideshow");
-                            for (i = 0; i < x.length; i++) {
-                                x[i].style.display = "none";
-                            }
-                            myIndex++;
-                            if (myIndex > x.length) {myIndex = 1}
-                            x[myIndex-1].style.display = "block";
-                            setTimeout(carousel, 3000);
-                        }
                     </script>
 
                 </div>
 
-                <a href="search.html?searchItem=Vegetarian" type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Alle Rezepte durchsuchen
-                </a>
-
+                </button>
             </div>
         </form>
     </div>
@@ -80,19 +69,14 @@
         <form action="/search" method="get" class="form-horizontal">
             <div class="form-group">
                 <label for="vegSearch"> Oder vielleicht vegetarisch? </label>
-                <input type="text" class="form-control" id="vegSearch" name="search" style="width:90%" />
+                <input type="text" class="form-control" id="vegSearch" name="vegSearch" style="width:90%" />
                 <img src="http://www.lecker.de/assets/field/image/griechischer-salat_0.jpg" style="width:90%">
-                <a href="search.html?searchItem=Vegetarian" type="submit" class="btn btn-primary">
+                <button  type="submit" class="btn btn-primary">
                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Vegetarisch durchsuchen
-                </a>
+                </button>
             </div>
         </form>
     </div>
-
-
-            <ul>
-           <li th:each="user :${users}" th:text="${user.lastname}" ></li>
-            </ul>
 
     </body>
 

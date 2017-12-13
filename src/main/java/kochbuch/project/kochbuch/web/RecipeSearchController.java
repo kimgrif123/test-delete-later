@@ -1,9 +1,7 @@
 package kochbuch.project.kochbuch.web;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
+
+import kochbuch.project.kochbuch.Kochbuch.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,18 +10,25 @@ import org.springframework.web.bind.annotation.*;
 
 public class RecipeSearchController
 {
-    private final String anonymous = "ROLE_ANONYMOUS";
+    private final RecipeService recipeService;
 
-    @RequestMapping("/search") //ensures that HTTP requests to /search are mapped to search()
-    public String search(@RequestParam(value = "searchItem", required = false) String searchItem, Model model )
-    {                                   // binds the value of the query String param searchItem into the String param of the search method
-        if (searchItem != null)
-        {
-            model.addAttribute("searchItem", searchItem); // the value of the searchItem param is added to a Model obj, making it accessible to the view template
-        }
-
-        return "search"; //returning a view/template
+    public RecipeSearchController(RecipeService recipeService)
+    {
+        this.recipeService = recipeService;
     }
 
+    @RequestMapping("/search")
+    public String search(@RequestParam(value = "search", required = false) String search, @RequestParam(value = "vegSearch", required = false) String vegSearch, Model model )
+    {
+        if(vegSearch != null && search == null)
+        {
+            model.addAttribute("searchResults",recipeService.findAllVegRByName(vegSearch));
+        }
 
+        if(search != null && vegSearch == null)
+        {
+            model.addAttribute("searchResults",recipeService.findAllByName(search));
+        }
+        return "search";
+    }
 }

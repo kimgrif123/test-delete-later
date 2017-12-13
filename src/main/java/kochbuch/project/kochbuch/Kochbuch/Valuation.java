@@ -24,6 +24,7 @@ public class Valuation
         this.comment = comment;
         this.author = author;
     }
+    public Valuation() {}
 
     public Integer getScore()
     {

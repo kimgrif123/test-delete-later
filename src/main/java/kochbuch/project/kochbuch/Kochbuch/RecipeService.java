@@ -1,5 +1,6 @@
 package kochbuch.project.kochbuch.Kochbuch;
 
+import com.sun.org.apache.regexp.internal.RE;
 import kochbuch.project.kochbuch.Benutzer.User;
 import kochbuch.project.kochbuch.Benutzer.UserService;
 import org.springframework.stereotype.Service;
@@ -18,13 +19,15 @@ public class RecipeService
     private final RecipeRepository  recipeRepository;
     private final IngredientService ingredientService;
     private final UserService userService;
+    private final ValuationService valuationService;
 
 
-    public RecipeService(RecipeRepository recipeRepository, IngredientService ingredientService, UserService userService)
+    public RecipeService(RecipeRepository recipeRepository, IngredientService ingredientService, UserService userService, ValuationService valuationService)
     {
         this.recipeRepository = recipeRepository;
         this.ingredientService = ingredientService;
         this.userService = userService;
+        this.valuationService = valuationService;
     }
 
 
@@ -38,6 +41,9 @@ public class RecipeService
     public void init() {
         if (recipeRepository.count() == 0)
         {
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //Bratkartoffeln//
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             createRecipeWithName(userService.findUserByName("Kai"),"Bratkartoffeln");
 
             ingredientService.createIngredient(findByNameRecipe("Bratkartoffeln"),"Kartoffeln",1.00,"kg");
@@ -46,6 +52,22 @@ public class RecipeService
             Recipe x = findByNameRecipe("Bratkartoffeln");
             x.setIngredientList(ingredientService.findIngredientByRecipe(findByNameRecipe("Bratkartoffeln")));
             updateRecipe(x.getId(),"Bratkartoffeln","Kartoffeln schnippeln und braten",2,15,1.00,"true","true");
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //BLT Sandwich//
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            createRecipeWithName(userService.findUserByName("Kim"),"BLT Sandwich");
+
+            ingredientService.createIngredient(findByNameRecipe("BLT Sandwich"),"Sandwich",2.00,"Scheiben");
+            ingredientService.createIngredient(findByNameRecipe("BLT Sandwich"),"Bacon",4.00,"Scheiben");
+            ingredientService.createIngredient(findByNameRecipe("BLT Sandwich"),"Eisbergsalat",1.00,"Kopf");
+            ingredientService.createIngredient(findByNameRecipe("BLT Sandwich"),"Tomate",1.00,"Stück");
+            ingredientService.createIngredient(findByNameRecipe("BLT Sandwich"),"Mayonnaise",20.00,"g");
+
+            Recipe y = findByNameRecipe("BLT Sandwich");
+            y.setIngredientList(ingredientService.findIngredientByRecipe(findByNameRecipe("BLT Sandwich")));
+            updateRecipe(y.getId(),"BLT Sandwich","Frühstücksspeck anbraten und auf Küchenpapier abtropfen lassen. Sandwichtoast im Backofen oder Toaster toasten. Brot mit Speck, Scheibentomaten, Eisbergsalat und Mayonnaise garnieren.",2,8,1.00,"true",null);
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
     }
 
@@ -90,6 +112,19 @@ public class RecipeService
         return userRecipes;
     }
 
+    public List<Recipe> findAllByName(String search)
+    {
+        //adding the Wildcard
+        String pattern = "%"+search+"%";
+        return recipeRepository.findAllByName(pattern);
+    }
+
+    public List<Recipe> findAllVegRByName(String search)
+    {
+        //adding the Wildcard
+        String pattern = "%"+search+"%";
+        return recipeRepository.findAllVegRByName(pattern);
+    }
     public void addIngredientToList(Long newRid, String name, Double quantity, String measure)
     {
         Ingredient i =  ingredientService.createIngredient(findByIdRecipe(newRid),name,quantity,measure);
@@ -128,6 +163,29 @@ public class RecipeService
         }
         saveRecipe(r);
     }
+
+    public void addValuationToList(Long newRid, Integer score, String comment,User user)
+    {
+        Recipe r = findByIdRecipe(newRid);
+
+        Valuation v =  valuationService.createValuation(r,score,comment,user);
+
+        r.addValuationToList(v);
+
+        saveRecipe(r);
+    }
+
+    public void removeValuation(Long rId, User user)
+    {
+
+        Recipe x = findByIdRecipe(rId);
+        Valuation v = valuationService.findValuationByRecipeAndAuthor(x,user);
+
+        x.removeValuation(v);
+        saveRecipe(x);
+
+        valuationService.deleteValuation(v);
+    }
     public void removeIngredient(Long rId, Long delete)
     {
 
@@ -145,5 +203,19 @@ public class RecipeService
         Recipe r = findByIdRecipe(id);
         recipeRepository.delete(r.getId());
 
+    }
+
+    public Boolean aBooleancheckForUserValuation(Long rId, User user)
+    {
+        Recipe x = findByIdRecipe(rId);
+        Valuation v = valuationService.findValuationByRecipeAndAuthor(x,user);
+        if(v == null)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

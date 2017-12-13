@@ -15,7 +15,7 @@
     <p><i>(PF)</i> = Pflichtfeld</p>
 Name <i>(PF)</i>: <input type="text" name="rname"  th:value="${newR?.name}" ><br>
 Dauer <i>(PF)</i>: <input type="number" name="duration" th:value="${newR?.duration}" > Minuten<br>
-Schwierigkeitsgrad <i>(PF)</i>: <input type="text" name="difficulty"  th:value="${newR?.difficulty}" ><br>
+Schwierigkeitsgrad <i>(PF)</i>: <input type="number" name="difficulty"  th:value="${newR?.difficulty}" ><br>
 Freigabe: <input type="checkbox" name="released" default="false" th:checked="${newR?.released}" ><br>
 Personenanzahl <i>(PF)</i>: <input type="number" name="pplnr"  th:value="${newR?.numberOfPeople}" ><br>
 Vegetarisch: <input type="checkbox" name="veggie" default="false"  th:checked="${newR?.vegetarian}" ><br>
