@@ -23,14 +23,10 @@ Personenanzahl <i>(PF)</i>: <input type="number" name="pplnr"  th:value="${newR?
 Vegetarisch: <input type="checkbox" name="veggie" default="false"  th:checked="${newR?.vegetarian}" ><br>
 
 Kochprozess <i>(PF)</i>: <input type="text" name="cprocess"  th:value="${newR?.cookingProcess}" ><br>
-    <input type="hidden" value="test" th:value="${newR?.id}" name="newRid">
-<button type="submit" form="recipe">Speichern</button>
-</form>
 
-<form id="ingredient" name="ingredient" action="userSite.html" method="get" th:if="${newR?.id} != null" onsubmit="return validateIngredientForm()">
-Zutat: <div class="ingredient">Name <i>(PF)</i>: <input type="String" name="inna"> Menge <i>(PF)</i>: <input type="number" name="innr"> Einheit <i>(PF)</i>: <input type="text" name="inun"><br></div>
+Zutat: <div class="ingredient">Name: <input type="String" name="inna"> Menge: <input type="number" name="innr"> Einheit: <input type="String" name="inun"><br></div>
    <input type="hidden" value="test" th:value="${newR?.id}" name="newRid">
-    <p><button type="submit">Hinzufügen</button></p>
+    <p><button type="submit">Speichern</button></p>
 </form>
 Meine Rezepte:</br>
 <ul th:each="userRecipe: ${userRecipes}">

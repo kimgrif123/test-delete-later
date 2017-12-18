@@ -34,7 +34,8 @@ public class RegistrationController
             //(Index checks upon the new user id and enables the access to his usersite)
 
             userService.createUser(uname,pswd,"USER");
-            return "index";
+            
+            return "login";
         }
 
         else
