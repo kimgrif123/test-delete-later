@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
+        <script src="/js/Application.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -39,10 +40,10 @@
             </table>
         </p>
         <p>
-            <form name="calc" action="show.html" method="get" th:if="${r.Id} != 0">
+            <form name="calc" action="show.html" method="get" th:if="${r.Id} != 0" onsubmit="return validateCalcForm()">
                 <input type="hidden" value="test" th:value="${r?.Id}" name="rId">
             <input type="hidden" value="test" th:value="${rId}" name="oId">
-                Personenanzahl <b th:text="${r?.numberOfPeople}"></b> multiplizieren bei <input type="number" name="calc"> <button type="submit">Ausrechnen</button>
+                Personenanzahl <b th:text="${r?.numberOfPeople}"></b> multiplizieren bei <input type="number" name="calc" id="calc"> <button type="submit">Ausrechnen</button>
             </form>
             <form name="nocalc" action="show.html" method="get" th:if="${r.Id} == 0">
                 <input type="hidden" value="test" th:value="${oId}" name="rId">
@@ -59,8 +60,8 @@
         </th:block>
 
         <th:block th:if="${r.Id} != 0">
-         <form id="valuation" name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen">
-            <div class="valuation">Bewertung 1 - 10: <input type="number" name="score"> </br> Kommentar: <input type="text" name="comment"> </div>
+         <form id="valuation" name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen" onsubmit="return validateValuationForm()">
+            <div class="valuation">Bewertung 1 - 10: <input type="number" name="score" id="score"> </br> Kommentar: <input type="text" name="comment"> </div>
             <input type="hidden" value="test" th:value="${r?.id}" name="rId">
             <p><button type="submit">Hinzufügen</button></p>
          </form>

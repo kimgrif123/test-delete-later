@@ -33,39 +33,8 @@ function validateRecipeForm()
         alert("Bitte alle Zutaten Felder füllen!");
         return false;
     }
-
-    //////////////////////////////////////////////////////////////////////
-    /*
-    if (f==null || f=="" && g!= null && g!="" && h !=null && h!="")
-    {
-        alert("Bitte alle Zutaten Felder füllen!");
-        return false;
-    }
-    if (f!=null && f!=""&& g==null || g=="" && h!=null && h!="")
-    {
-        alert("Bitte alle Zutaten Felder füllen!");
-        return false;
-    }
-    if (f!=null && f!="" && g!= null && g!="" && h==null || h=="")
-    {
-        alert("Bitte alle Zutaten Felder füllen!");
-        return false;
-    }
-    */
-    //////////////////////////////////////////////////////////////////////
-
 }
 
-function validateIngredientForm()
-{
-
-
-    if (f==null || f=="" && g!= null || g!="" && h !=null || h!="")
-    {
-        alert("Bitte alle Pflichtfelder füllen!");
-        return false;
-    }
-}
 
 function validateValuationForm()
 {
