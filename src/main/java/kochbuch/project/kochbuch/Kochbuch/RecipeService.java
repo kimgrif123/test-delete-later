@@ -50,8 +50,12 @@ public class RecipeService
             ingredientService.createIngredient(findByNameRecipe("Bratkartoffeln"),"Öl",20.00,"ml");
 
             Recipe x = findByNameRecipe("Bratkartoffeln");
+
+            valuationService.createValuation(x,8,"gute deutsche Hausmannskost :)",userService.findUserByName("Nick"));
+            x.setValuationList(valuationService.findValuationByRecipe(x));
+
             x.setIngredientList(ingredientService.findIngredientByRecipe(findByNameRecipe("Bratkartoffeln")));
-            updateRecipe(x.getId(),"Bratkartoffeln","Kartoffeln schnippeln und braten",2,15,1.00,"true","true");
+            updateRecipe(x.getId(),"Bratkartoffeln","Kartoffeln schnippeln und braten",2,15,1.00,"true","true","https://tse1.mm.bing.net/th?id=OIP.aWavtNjmEemHP7EAemVbtwEsDI&w=300&h=198&c=7&qlt=90&o=4&pid=1.7");
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //BLT Sandwich//
@@ -65,8 +69,11 @@ public class RecipeService
             ingredientService.createIngredient(findByNameRecipe("BLT Sandwich"),"Mayonnaise",20.00,"g");
 
             Recipe y = findByNameRecipe("BLT Sandwich");
+            valuationService.createValuation(y,10,"MURICA BABY",userService.findUserByName("Kai"));
+            y.setValuationList(valuationService.findValuationByRecipe(y));
+
             y.setIngredientList(ingredientService.findIngredientByRecipe(findByNameRecipe("BLT Sandwich")));
-            updateRecipe(y.getId(),"BLT Sandwich","Frühstücksspeck anbraten und auf Küchenpapier abtropfen lassen. Sandwichtoast im Backofen oder Toaster toasten. Brot mit Speck, Scheibentomaten, Eisbergsalat und Mayonnaise garnieren.",2,8,1.00,"true",null);
+            updateRecipe(y.getId(),"BLT Sandwich","Frühstücksspeck anbraten und auf Küchenpapier abtropfen lassen. Sandwichtoast im Backofen oder Toaster toasten. Brot mit Speck, Scheibentomaten, Eisbergsalat und Mayonnaise garnieren.",2,8,1.00,"true",null,"https://tse3.mm.bing.net/th?id=OIP.iQlqePhc8HeJN-Bip0BRrwHaFj&w=243&h=182&c=7&qlt=90&o=4&pid=1.7");
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
     }
@@ -136,7 +143,7 @@ public class RecipeService
         saveRecipe(r);
     }
 
-    public void updateRecipe(Long id, String name, String cprocess, Integer diff, Integer duration, Double nrOfPpl, String released, String veggie)
+    public void updateRecipe(Long id, String name, String cprocess, Integer diff, Integer duration, Double nrOfPpl, String released, String veggie, String picURL)
     {
         Recipe r = findByIdRecipe(id);
         r.setName(name);
@@ -144,7 +151,7 @@ public class RecipeService
         r.setDifficulty(diff);
         r.setNumberOfPeople(nrOfPpl);
         r.setDuration(duration);
-
+        r.setPicURL(picURL);
         if(released != null)
         {
             r.setReleased(true);

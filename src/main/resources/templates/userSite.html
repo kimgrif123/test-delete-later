@@ -23,6 +23,7 @@ Personenanzahl <i>(PF)</i>: <input type="number" name="pplnr"  th:value="${newR?
 Vegetarisch: <input type="checkbox" name="veggie" default="false"  th:checked="${newR?.vegetarian}" ><br>
 
 Kochprozess <i>(PF)</i>: <input type="text" name="cprocess"  th:value="${newR?.cookingProcess}" ><br>
+Bild URL : <input type="text" name="picURL"  th:value="${newR?.picURL}" ><br>
 
 Zutat: <div class="ingredient">Name: <input type="String" name="inna"> Menge: <input type="number" name="innr"> Einheit: <input type="String" name="inun"><br></div>
    <input type="hidden" value="test" th:value="${newR?.id}" name="newRid">
@@ -67,6 +68,6 @@ Freigegeben:
         <td><form action="userSite.html" method="get"> <input type="hidden" value="test" th:value="${newR?.id}" name="newRid"> <input type="hidden" name="delete" value="" th:value="${in.id}"><button type="submit">Entfernen</button></form></td>
     </tr>
 </table>
-
+<img th:src="${newR?.picURL}" height="320" width="320"/>
 </body>
 </html>

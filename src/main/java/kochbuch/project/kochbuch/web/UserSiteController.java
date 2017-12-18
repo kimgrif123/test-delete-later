@@ -24,7 +24,7 @@ public class UserSiteController
 
 
     @RequestMapping(value = "/userSite")
-    public String userSite(@RequestParam(value = "newRecipe", required = false) String newRecipe, @RequestParam(value = "innr", required = false) Double innr, @RequestParam(value = "inun", required = false) String inun, @RequestParam(value = "inna", required = false) String inna, @RequestParam(value = "newRid", required = false) Long newRid,@RequestParam(value = "rname",required = false) String rname, @RequestParam(value = "duration", required = false) Integer duration, @RequestParam(value = "difficulty", required = false) Integer diff, @RequestParam(value = "pplnr", required = false) Double pplnr, @RequestParam(value = "cprocess", required = false) String cprocess, @RequestParam(value = "released", required = false) String released, @RequestParam(value = "veggie", required = false) String veggie, @RequestParam(value = "delete", required = false) Long delete,@RequestParam(value = "deleteRecipe", required = false) String deleteRecipe, Model model)
+    public String userSite(@RequestParam(value = "newRecipe", required = false) String newRecipe, @RequestParam(value = "innr", required = false) Double innr, @RequestParam(value = "inun", required = false) String inun, @RequestParam(value = "inna", required = false) String inna, @RequestParam(value = "newRid", required = false) Long newRid,@RequestParam(value = "rname",required = false) String rname, @RequestParam(value = "duration", required = false) Integer duration, @RequestParam(value = "difficulty", required = false) Integer diff, @RequestParam(value = "pplnr", required = false) Double pplnr, @RequestParam(value = "cprocess", required = false) String cprocess, @RequestParam(value = "released", required = false) String released, @RequestParam(value = "veggie", required = false) String veggie, @RequestParam(value = "delete", required = false) Long delete,@RequestParam(value = "deleteRecipe", required = false) String deleteRecipe,@RequestParam(value = "picURL", required = false) String picURL, Model model)
     {
 
         user = userService.findUserByName(SecurityContextHolder.getContext().getAuthentication().getName());
@@ -38,7 +38,7 @@ public class UserSiteController
         }
         if(newRid != null && rname != null && duration != null && diff != null && pplnr != null && cprocess != null)
         {
-            recipeService.updateRecipe(newRid,rname,cprocess,diff,duration,pplnr,released,veggie);
+            recipeService.updateRecipe(newRid,rname,cprocess,diff,duration,pplnr,released,veggie,picURL);
             model.addAttribute("newR",recipeService.findByIdRecipe(newRid));
         }
 

@@ -42,6 +42,9 @@
         <p>
             <form name="calc" action="show.html" method="get" th:if="${r.Id} != 0" onsubmit="return validateCalcForm()">
                 <input type="hidden" value="test" th:value="${r?.Id}" name="rId">
+
+            <!--TODO @Kim bitte für Usability und Security hier eine Dropdown Möglichkeit schaffen: Calc-->
+
             <input type="hidden" value="test" th:value="${rId}" name="oId">
                 Personenanzahl <b th:text="${r?.numberOfPeople}"></b> multiplizieren bei <input type="number" name="calc" id="calc"> <button type="submit">Ausrechnen</button>
             </form>
@@ -61,7 +64,11 @@
 
         <th:block th:if="${r.Id} != 0">
          <form id="valuation" name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen" onsubmit="return validateValuationForm()">
-            <div class="valuation">Bewertung 1 - 10: <input type="number" name="score" id="score"> </br> Kommentar: <input type="text" name="comment"> </div>
+            <div class="valuation">Bewertung 1 - 10: <input type="number" name="score" id="score">
+
+                <!--TODO @Kim bitte für Usability und Security hier eine Dropdown Möglichkeit schaffen: Score-->
+
+                </br> Kommentar: <input type="text" name="comment"> </div>
             <input type="hidden" value="test" th:value="${r?.id}" name="rId">
             <p><button type="submit">Hinzufügen</button></p>
          </form>

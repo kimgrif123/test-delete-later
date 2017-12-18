@@ -5,6 +5,7 @@ function validateRecipeForm()
     var c =document.forms["recipe"]["difficulty"].value;
     var d =document.forms["recipe"]["pplnr"].value;
     var e =document.forms["recipe"]["cprocess"].value;
+    var u =document.forms["recipe"]["picURL"].value;
 
     var f =document.forms["recipe"]["inna"].value;
     var g =document.forms["recipe"]["innr"].value;
@@ -33,7 +34,14 @@ function validateRecipeForm()
         alert("Bitte alle Zutaten Felder füllen!");
         return false;
     }
+
+    if(u!="")
+    {
+       return confirm("Bestätigen Sie, dass die hier angegebene Bildquelle gegen keinerlei Datenschutzrichtlinien Dritter verstößt.");
+    }
 }
+
+
 
 
 function validateValuationForm()

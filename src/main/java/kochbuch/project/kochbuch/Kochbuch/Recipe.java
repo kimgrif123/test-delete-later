@@ -30,6 +30,7 @@ public class Recipe
     @OneToOne
     private User cook;
 
+    private String picURL;
     public Recipe(User cook)
     {
         this.valuationList = new ArrayList<Valuation>();
@@ -64,7 +65,13 @@ public class Recipe
     {
         this.cook = cook;
     }
+    public String getPicURL() {
+        return picURL;
+    }
 
+    public void setPicURL(String picURL) {
+        this.picURL = picURL;
+    }
     public long getId(){return id;}
 
     public String getName() {
@@ -185,10 +192,13 @@ public class Recipe
         return this.valuationList;
     }
 
-    public void setValuationList(Valuation v)
+    public void setValuationList(List<Valuation> v)
     {
+        /*
         this.valuationList.add(v);
         this.calcAvgScore();
+        */
+        this.valuationList = v;
     }
 
     public void removeValuation(Valuation v)
@@ -273,7 +283,6 @@ public class Recipe
     public Recipe clone()
     {
         Recipe x = new Recipe(null);
-        //x.id   = this.getId();
         x.cook = this.getCook();
         x.name = this.getName();
         x.avgScore = this.getAvgScore();
@@ -285,6 +294,7 @@ public class Recipe
         x.released = this.getReleased();
         x.valuationList = this.getValuationList();
         x.ingredientList = this.getIngredientList();
+        x.picURL = this.getPicURL();
 
         return x;
     }
