@@ -3,19 +3,67 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Rezepte</title>
 
 </head>
 
 <body>
-Suchergebnisse:</br>
-<ul th:each="searchResult: ${searchResults}">
-    <li>
-        <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}"><b th:text="${searchResult?.name}"></b>
-            <button value="show" name="show" type="submit">Anzeigen</button>
-        </form>
-    </li>
-</ul>
+
+<div class="page-header">
+    <div class="container">
+        <div class="btn-group pull-right">
+            <a href="/" type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Rezepte</h1>
+    </div>
+
+</div>
+
+<div class="container">
+    <h3 style="color: green">Suchergebnisse:</h3>
+    <table class="table table-hover" th:each="searchResult: ${searchResults}">
+        <tbody>
+        <tr>
+            <td>
+                <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
+                    <h4 style="font-weight:bold" th:text="${searchResult?.name}"></h4><br><br>
+
+                    <!-- TODO Preconstruct Bewertung-->
+                    Bewertung: <b th:text="${searchResult?.avgScore}"></b>
+                </form>
+            </td>
+            <td>
+                <!-- TODO Kurzbeschreibung-->
+                <p>Kurzbeschreibung</p>
+            </td>
+            <td>
+                <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
+                    <button class="btn btn-success" value="show" name="show" type="submit">Anzeigen</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--
+<h3>Suchergebnisse:</h3>
+   <ul th:each="searchResult: ${searchResults}">
+      <li>
+         <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}"><b th:text="${searchResult?.name}"></b>
+              <button class="btn-sm btn-success" value="show" name="show" type="submit">Anzeigen</button>
+         </form>
+      </li>
+   </ul>
+-->
+
 </body>
 
 

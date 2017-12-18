@@ -2,7 +2,10 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>Rezept</title>
     </head>
     <body>
         <p> <a href="">Startseite</a></p>
@@ -57,7 +60,7 @@
 
         <th:block th:if="${r.Id} != 0">
          <form id="valuation" name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen">
-            Zutat: <div class="valuation">Bewertung 1 - 10: <input type="number" name="score"> </br> Kommentar: <input type="text" name="comment"> </div>
+            <div class="valuation">Bewertung 1 - 10: <input type="number" name="score"> </br> Kommentar: <input type="text" name="comment"> </div>
             <input type="hidden" value="test" th:value="${r?.id}" name="rId">
             <p><button type="submit">Hinzufügen</button></p>
          </form>
