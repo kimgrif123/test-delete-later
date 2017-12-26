@@ -1,16 +1,169 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="UTF-8">
-        <script src="/js/Application.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>Rezept</title>
-    </head>
-    <body>
-        <p> <a href="/">Startseite</a></p>
+<head>
+    <meta charset="UTF-8">
+    <script src="/js/Application.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Rezept Anzeigen</title>
+</head>
+<body>
 
+<div class="page-header">
+    <div class="container">
+        <div class="btn-group pull-right">
+            <a href="login.html" class="btn btn-primary"th:if="${#httpServletRequest.remoteUser} == null">
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login
+            </a>
+            <a href="/" type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Rezept Anzeigen</h1>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-hover">
+        <tbody>
+
+        <tr>
+            <td>
+                <h3 style="color: green; font-weight:bold" th:text="${r?.name}"></h3><br>
+                <img th:src="${r?.picURL}" style="width:80%"><br>
+            </td>
+            <td>
+                <h4>Information:</h4>
+                Koch: <b th:text="${r?.cook?.username}"></b><br>
+                Durchschnittliche Bewertung: <b th:text="${r?.avgScore}"></b><br>
+                Schwierigkeitsstufe: <b th:text="${r?.difficulty}"></b><br>
+                Dauer: <b th:text="${r?.duration}"></b> Minuten<br>
+                Personenanzahl: <b th:text="${r?.numberOfPeople}"></b><br><br>
+
+                <form name="calc" action="show.html" method="get" th:if="${r.Id} != 0" onsubmit="return validateCalcForm()">
+                    <input type="hidden" value="test" th:value="${r?.Id}" name="rId">
+                    <input type="hidden" value="test" th:value="${rId}" name="oId">
+                    Personenanzahl <b th:text="${r?.numberOfPeople}"></b>
+                    <div class="form-group" style="width: 30%">
+                        <label for="calc"> multiplizieren bei
+                            <select class="form-control" id="calc">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                        </select>
+                        </label>
+                    </div>
+
+                    <button class="btn btn-success" type="submit">Ausrechnen</button>
+
+                </form><br><br>
+
+                <form name="nocalc" action="show.html" method="get" th:if="${r.Id} == 0">
+                    <input type="hidden" value="test" th:value="${oId}" name="rId">
+                    <button class="btn btn-info" type="submit">zum Original </button>
+                </form>
+
+            </td>
+            <td>
+                <h4>Zubereitung:</h4>
+                <p th:text="${r?.cookingProcess}"></p><br>
+            </td>
+            <td>
+                <h4>Zutaten:</h4>
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Menge</th>
+                        <th>Einheit</th>
+                    </tr>
+                    <tr th:each="in : ${r?.ingredientList}">
+                        <td th:text="${in.name}" > </td>
+                        <td th:text="${in.quantity}" > </td>
+                        <td th:text="${in.measure}" > </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>
+                <h3>Bewertungen</h3>
+            </td>
+
+            <td>
+                <h4>Bewertungen:</h4>
+                <th:block th:each="v : ${r?.valuationList}">
+                    <p>
+                        Bewertung: <b th:text="${v?.score}"></b></br>
+                        Kommentar: <b th:text="${v?.comment}"></b></br>
+                        Author: <b th:text="${v?.author?.username}"></b></br>
+                    </p>
+                </th:block>
+            </td>
+
+            <td>
+                <h4>Neue Bewertung:</h4>
+                <th:block th:if="${r.Id} != 0">
+                    <form id="valuation" name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen" onsubmit="return validateValuationForm()">
+                        <div class="valuation">
+
+                            <div class="form-group" style="width: 30%">
+                                <label for="bewertung"> Bewertung 1-10:
+                                    <select class="form-control" id="bewertung">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                    </select>
+                                </label>
+                            </div>
+
+                            <!--
+                            Bewertung 1 - 10:
+                            <input type="number" name="score" id="score">
+
+                          -->
+                            </br>
+
+                            Kommentar:
+                            <input type="text" name="comment">
+
+                        </div>
+                        <input type="hidden" value="test" th:value="${r?.id}" name="rId">
+
+                        <button class="btn btn-success" type="submit">Hinzufügen</button>
+
+                    </form>
+
+                    <p>
+                        <i th:if="${vStatus} == vClose"><b>Melde dich an um das Rezept zu bewerten!</b></i>
+                    </p>
+
+                </th:block>
+            </td>
+
+            <td>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<!--
         Koch:
         <b th:text="${r?.cook?.username}"></b><br>
         Rezept:
@@ -39,20 +192,25 @@
                 </tr>
             </table>
         </p>
+
+
         <p>
             <form name="calc" action="show.html" method="get" th:if="${r.Id} != 0" onsubmit="return validateCalcForm()">
                 <input type="hidden" value="test" th:value="${r?.Id}" name="rId">
 
-            <!--TODO @Kim bitte für Usability und Security hier eine Dropdown Möglichkeit schaffen: Calc-->
+
 
             <input type="hidden" value="test" th:value="${rId}" name="oId">
-                Personenanzahl <b th:text="${r?.numberOfPeople}"></b> multiplizieren bei <input type="number" name="calc" id="calc"> <button type="submit">Ausrechnen</button>
+                Personenanzahl <b th:text="${r?.numberOfPeople}"></b> multiplizieren bei
+            <input type="number" name="calc" id="calc"> <button type="submit">Ausrechnen</button>
             </form>
             <form name="nocalc" action="show.html" method="get" th:if="${r.Id} == 0">
                 <input type="hidden" value="test" th:value="${oId}" name="rId">
                  <button type="submit">zum Original </button>
             </form>
         </p>
+
+
             <h3>Bewertungen</h3>
         <th:block th:each="v : ${r?.valuationList}">
             <p>
@@ -66,7 +224,6 @@
          <form id="valuation" name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen" onsubmit="return validateValuationForm()">
             <div class="valuation">Bewertung 1 - 10: <input type="number" name="score" id="score">
 
-                <!--TODO @Kim bitte für Usability und Security hier eine Dropdown Möglichkeit schaffen: Score-->
 
                 </br> Kommentar: <input type="text" name="comment"> </div>
             <input type="hidden" value="test" th:value="${r?.id}" name="rId">
@@ -85,5 +242,7 @@
             </form>
          </p>
         </th:block>
-    </body>
+-->
+
+</body>
 </html>

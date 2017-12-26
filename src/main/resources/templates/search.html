@@ -23,7 +23,6 @@
     <div class="container">
         <h1>Rezepte</h1>
     </div>
-
 </div>
 
 <div class="container">
@@ -32,16 +31,14 @@
         <tbody>
         <tr>
             <td>
-                <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
-                    <h4 style="font-weight:bold" th:text="${searchResult?.name}"></h4><br><br>
-
-                    <!-- TODO Preconstruct Bewertung-->
-                    Bewertung: <b th:text="${searchResult?.avgScore}"></b>
-                </form>
+            <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
+                <h4 style="font-weight:bold" th:text="${searchResult?.name}"></h4><br><br>
+                Bewertung: <b th:text="${searchResult?.avgScore}"></b>
+            </form>
             </td>
             <td>
-                <!-- TODO Kurzbeschreibung-->
-                <img th:src="${searchResult?.picURL}" height="160" width="160"/>
+                <!-- TODO Image Formatting-->
+                <img src="${searchResult?.picURL}" style="width:90%">
             </td>
             <td>
                 <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
