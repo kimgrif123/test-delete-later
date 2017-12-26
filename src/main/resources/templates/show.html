@@ -31,10 +31,12 @@
         <tbody>
 
         <tr>
+
             <td>
                 <h3 style="color: green; font-weight:bold" th:text="${r?.name}"></h3><br>
                 <img th:src="${r?.picURL}" style="width:80%"><br>
             </td>
+
             <td>
                 <h4>Information:</h4>
                 Koch: <b th:text="${r?.cook?.username}"></b><br>
@@ -47,30 +49,31 @@
                     <input type="hidden" value="test" th:value="${r?.Id}" name="rId">
                     <input type="hidden" value="test" th:value="${rId}" name="oId">
                     Personenanzahl <b th:text="${r?.numberOfPeople}"></b>
+
+                    <!--
                     <div class="form-group" style="width: 30%">
+                        -->
                         <label for="calc"> multiplizieren bei
-                            <select class="form-control" id="calc">
+                            <select class="form-control" id="calc" name="calc">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
                         </select>
                         </label>
-                    </div>
 
                     <button class="btn btn-success" type="submit">Ausrechnen</button>
 
-                </form><br><br>
+                </form>
+
+                <br>
+                <br>
 
                 <form name="nocalc" action="show.html" method="get" th:if="${r.Id} == 0">
                     <input type="hidden" value="test" th:value="${oId}" name="rId">
                     <button class="btn btn-info" type="submit">zum Original </button>
                 </form>
 
-            </td>
-            <td>
-                <h4>Zubereitung:</h4>
-                <p th:text="${r?.cookingProcess}"></p><br>
             </td>
             <td>
                 <h4>Zutaten:</h4>
@@ -88,6 +91,10 @@
                     </tr>
                     </tbody>
                 </table>
+            </td>
+            <td>
+                <h4>Zubereitung:</h4>
+                <p th:text="${r?.cookingProcess}"></p><br>
             </td>
         </tr>
 
@@ -110,13 +117,12 @@
 
             <td>
                 <h4>Neue Bewertung:</h4>
+                <p style="color: red">Nur eine Bewertung pro Nutzer!</p>
                 <th:block th:if="${r.Id} != 0">
-                    <form id="valuation" name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen" onsubmit="return validateValuationForm()">
-                        <div class="valuation">
-
-                            <div class="form-group" style="width: 30%">
-                                <label for="bewertung"> Bewertung 1-10:
-                                    <select class="form-control" id="bewertung">
+                    <form name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen" onsubmit="return validateValuationForm()">
+                        <div class="form-group" style="width: 30%">
+                                <label for="score"> Bewertung 1-10:
+                                    <select class="form-control" id="score" name="score">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -131,17 +137,13 @@
                                 </label>
                             </div>
 
-                            <!--
-                            Bewertung 1 - 10:
-                            <input type="number" name="score" id="score">
 
-                          -->
                             </br>
 
                             Kommentar:
                             <input type="text" name="comment">
 
-                        </div>
+
                         <input type="hidden" value="test" th:value="${r?.id}" name="rId">
 
                         <button class="btn btn-success" type="submit">Hinzufügen</button>
