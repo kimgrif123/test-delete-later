@@ -117,7 +117,7 @@
 
             <td>
                 <h4>Neue Bewertung:</h4>
-                <p style="color: red">Nur eine Bewertung pro Nutzer!</p>
+                <p><i><b>Nur eine Bewertung pro Nutzer!</b></i></p>
                 <th:block th:if="${r.Id} != 0">
                     <form name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen" onsubmit="return validateValuationForm()">
                         <div class="form-group" style="width: 30%">

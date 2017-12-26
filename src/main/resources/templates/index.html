@@ -14,23 +14,38 @@
     <div class="page-header">
         <div class="container">
             <div class="btn-group pull-right">
-                <a href="login.html" class="btn btn-primary"th:if="${#httpServletRequest.remoteUser} == null">
-                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login
-                </a>
 
-                <a href="registration.html" class="btn btn-primary"th:if="${#httpServletRequest.remoteUser} == null">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrieren
-                </a>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Menu
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                        <li>
+                            <a href="login.html" class="btn btn-secondary"th:if="${#httpServletRequest.remoteUser} == null">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="registration.html" class="btn btn-secondary"th:if="${#httpServletRequest.remoteUser} == null">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrieren
+                            </a>
+                        </li>
+                        <li>
+                            <a href="userSite.html" class="btn btn-secondary">
+                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Meine Seite
+                            </a>
+                        </li>
+                        <li>
+                            <form action="/logout" class="pull-right" method="post" th:if="${#httpServletRequest.remoteUser} != null">
+                                <button type="submit" class="btn btn-secondary">
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true" th:text="${#httpServletRequest.remoteUser}"> </span>
+                                    abmelden
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
 
-                <a href="userSite.html" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Meine Seite
-                </a>
-                <form action="/logout" class="pull-right" method="post" th:if="${#httpServletRequest.remoteUser} != null">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-log-out" aria-hidden="true" th:text="${#httpServletRequest.remoteUser}"> </span>
-                        abmelden
-                    </button>
-                </form>
             </div>
         </div>
         <div class="container">

@@ -27,7 +27,7 @@
 
 <div class="container">
     <h3 style="color: green">Suchergebnisse:</h3>
-    <table class="table table-hover" th:each="searchResult: ${searchResults}">
+    <table class="table table-hover" th:each="searchResult: ${searchResults}" >
         <tbody>
         <tr>
             <td>
@@ -37,8 +37,7 @@
             </form>
             </td>
             <td>
-                <!-- TODO Image Formatting-->
-                <img src="${searchResult?.picURL}" style="width:90%">
+                <img th:src="${r?.picURL}" style="width:80%"><br>
             </td>
             <td>
                 <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
