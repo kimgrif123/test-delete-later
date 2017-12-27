@@ -1,13 +1,11 @@
 package kochbuch.project.kochbuch.Kochbuch;
 
-import com.sun.org.apache.regexp.internal.RE;
 import kochbuch.project.kochbuch.Benutzer.User;
 import kochbuch.project.kochbuch.Benutzer.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +13,11 @@ import java.util.List;
 @Transactional
 public class RecipeService
 {
+    /*
+       TODO COMMENT: class - RecipeService
+       The following class abstracts the interaction with instances the class Recipe
+       by offering services bound to a Recipe object and its Attributes.
+    */
 
     private final RecipeRepository  recipeRepository;
     private final IngredientService ingredientService;
@@ -35,7 +38,25 @@ public class RecipeService
         recipeRepository.save(new Recipe(cook));
     }
 
+    /*
+        TODO COMMENT: Recipe @PostConstrut
+        The spring data annotation @PostConstruct allows the method init() to execute the code within
+        after the application has started and before Users interact with it.
+        Creation of a Recipe:
 
+                                1. Creation of a Recipe object with the defines Attributes "username" and "name"
+
+                                2. Creation of Ingredients objects by calling upon the instance of IngredientService,
+                                   filling the attribute recipe by getting the just created Recipe object with its name.
+
+                                     !Similar procedure applies to the Creation of the Valuations objects.!
+
+                                3. The attributes "ingredientList" is updated by setting the respective list
+                                   with the search result/return value (of the Type List<Ingredient>)
+                                   by searching Ingredient objects with the equal recipe attribute.
+
+                                     !Similar procedure applies to the setting of the attribute "valuationList" with !
+    */
     @PostConstruct
     @Transactional
     public void init() {
@@ -55,7 +76,7 @@ public class RecipeService
             x.setValuationList(valuationService.findValuationByRecipe(x));
 
             x.setIngredientList(ingredientService.findIngredientByRecipe(findByNameRecipe("Bratkartoffeln")));
-            updateRecipe(x.getId(),"Bratkartoffeln","Kartoffeln schnippeln und braten",2,15,1.00,"true","true","https://tse1.mm.bing.net/th?id=OIP.aWavtNjmEemHP7EAemVbtwEsDI&w=300&h=198&c=7&qlt=90&o=4&pid=1.7");
+            updateRecipe(x.getId(),"Bratkartoffeln","Kartoffeln schnippeln und braten",2,15,1,"true","true","https://tse1.mm.bing.net/th?id=OIP.aWavtNjmEemHP7EAemVbtwEsDI&w=300&h=198&c=7&qlt=90&o=4&pid=1.7");
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //BLT Sandwich//
@@ -73,7 +94,7 @@ public class RecipeService
             y.setValuationList(valuationService.findValuationByRecipe(y));
 
             y.setIngredientList(ingredientService.findIngredientByRecipe(findByNameRecipe("BLT Sandwich")));
-            updateRecipe(y.getId(),"BLT Sandwich","Frühstücksspeck anbraten und auf Küchenpapier abtropfen lassen. Sandwichtoast im Backofen oder Toaster toasten. Brot mit Speck, Scheibentomaten, Eisbergsalat und Mayonnaise garnieren.",2,8,1.00,"true",null,"https://tse3.mm.bing.net/th?id=OIP.iQlqePhc8HeJN-Bip0BRrwHaFj&w=243&h=182&c=7&qlt=90&o=4&pid=1.7");
+            updateRecipe(y.getId(),"BLT Sandwich","Frühstücksspeck anbraten und auf Küchenpapier abtropfen lassen. Sandwichtoast im Backofen oder Toaster toasten. Brot mit Speck, Scheibentomaten, Eisbergsalat und Mayonnaise garnieren.",2,8,1,"true",null,"https://tse3.mm.bing.net/th?id=OIP.iQlqePhc8HeJN-Bip0BRrwHaFj&w=243&h=182&c=7&qlt=90&o=4&pid=1.7");
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
     }
@@ -143,7 +164,7 @@ public class RecipeService
         saveRecipe(r);
     }
 
-    public void updateRecipe(Long id, String name, String cprocess, Integer diff, Integer duration, Double nrOfPpl, String released, String veggie, String picURL)
+    public void updateRecipe(Long id, String name, String cprocess, Integer diff, Integer duration, Integer nrOfPpl, String released, String veggie, String picURL)
     {
         Recipe r = findByIdRecipe(id);
         r.setName(name);

@@ -9,6 +9,12 @@ import java.util.Collections;
 
 public class UserAdapter implements UserDetails
 {
+    /*
+    TODO COMMENT: class - UserAdapter
+    The following class is required to integrate the spring security framework
+    and handles the interactions of the security framework with the User object.
+
+     */
     private final User user;
 
     public UserAdapter(User user)

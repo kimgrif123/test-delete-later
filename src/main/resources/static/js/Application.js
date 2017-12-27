@@ -39,6 +39,7 @@ function validateRecipeForm()
     {
        return confirm("Bestätigen Sie, dass die hier angegebene Bildquelle gegen keinerlei Datenschutzrichtlinien Dritter verstößt.");
     }
+
 }
 
 
@@ -57,6 +58,7 @@ function validateValuationForm()
 
 function validateCalcForm()
 {
+    var patt = /[0-9],[0-9]/;
     var x = document.getElementById("calc").value;
 
     if(isInt(x) && x < 1 || x > 100)
@@ -64,6 +66,15 @@ function validateCalcForm()
         alert("Damit können wir nicht rechnen! (0 - 100)");
         return false
     }
+
+    //It searches a string for a pattern, and returns true or false, depending on the result.
+
+    if(patt.test(x))
+    {
+        alert("Wir sind hier nicht bei 'Two and a Half Man'!");
+        return false;
+    }
+
 }
 
 function isInt(value)

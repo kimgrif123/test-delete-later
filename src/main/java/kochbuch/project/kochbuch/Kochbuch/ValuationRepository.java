@@ -11,6 +11,11 @@ import java.util.List;
 @Repository
 public interface ValuationRepository extends JpaRepository<Valuation,Long>
 {
+   /*
+        TODO COMMENT: repository - ValuationRepository
+        The following class is required to integrate the spring data framework
+        and handles the SQL database queries for the class Valuation.
+    */
 
     @Query("select v from Valuation v where v.recipe = :recipe")
     List<Valuation> findValuationByRecipe(@Param("recipe") Recipe recipe);

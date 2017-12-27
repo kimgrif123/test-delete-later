@@ -11,6 +11,19 @@ import java.util.List;
 @Entity
 public class Recipe
 {
+    /*
+        TODO - COMMENT: class - Recipe CHECK!
+        The following class contains Getter & Setter for the defined attributes,
+        two constructors, calculation methods and a comparator.
+        The empty constructor is required to fulfill a requirement of the used Frameworks.
+
+        The implemented annotations @Id @GeneratedValue define a ID to be automatically generated,
+        when a instance of the class Recipe is saved as an entity(due to @Entity) in the database.
+
+        The annotations @OneToMany, @OneToOne define the entity relationships while orphanRemoval
+        enables a cascading deletion of foreign key bound entities.
+     */
+
     @Id
     @GeneratedValue
     private long id;
@@ -18,7 +31,7 @@ public class Recipe
     @OneToMany(orphanRemoval = true, mappedBy = "recipe")
     private List<Ingredient>  ingredientList;
     private String cookingProcess;
-    private Double numberOfPeople;
+    private Integer numberOfPeople;
 
     private Integer difficulty;
     private Integer duration;
@@ -55,6 +68,8 @@ public class Recipe
         this.setCook(cook);
         this.name = name;
     }
+
+    public Recipe(){}
 
     public User getCook()
     {
@@ -113,30 +128,6 @@ public class Recipe
         this.valuationList.add(v);
     }
 
-    public void printIngredientList() throws IllegalAccessException
-    {
-        for (Object x : this.getIngredientList())
-        {
-
-            Object someObject = x;
-            for (Field field : someObject.getClass().getDeclaredFields()) {
-                field.setAccessible(true);
-                Object value = field.get(someObject);
-                if (value != null) {
-                    System.out.print(value+" ");
-                }
-            }
-
-            System.out.println(" ");
-        }
-
-    }
-
-    public void printCook() throws IllegalAccessException
-    {
-        String un = this.getCook().getUsername();
-        System.out.println("Koch: "+un);
-    }
     public String getCookingProcess()
     {
         return this.cookingProcess;
@@ -147,12 +138,12 @@ public class Recipe
         this.cookingProcess = cookingProcess;
     }
 
-    public Double getNumberOfPeople()
+    public Integer getNumberOfPeople()
     {
         return this.numberOfPeople;
     }
 
-    public void setNumberOfPeople(Double numberOfPeople)
+    public void setNumberOfPeople(Integer numberOfPeople)
     {
         this.numberOfPeople = numberOfPeople;
     }
@@ -194,10 +185,6 @@ public class Recipe
 
     public void setValuationList(List<Valuation> v)
     {
-        /*
-        this.valuationList.add(v);
-        this.calcAvgScore();
-        */
         this.valuationList = v;
     }
 
@@ -248,20 +235,21 @@ public class Recipe
         this.ingredientList = x;
     }
 
-    public Recipe recipeCalculator(double m)
+    public Recipe recipeCalculator(Integer m)
     {
 
         Recipe indi = this.clone();
-        Integer y = indi.getIngredientList().size();
-        double multiply = m;
+
+        Integer z = indi.getDuration();
+        Integer multiply = m;
 
        List<Ingredient> indiList = indi.getIngredientList();
-
+       Integer newDuration = z*multiply;
         for(Ingredient in: indiList)
         {
             in.setQuantity(in.getQuantity()*multiply);
         }
-
+        indi.setDuration(newDuration);
         indi.setNumberOfPeople(multiply);
         indi.setIngredientList(indiList);
 
@@ -298,6 +286,36 @@ public class Recipe
 
         return x;
     }
-    public Recipe(){}
 
+    /*
+    TODO ignore
+    Following methods have only been used for try outs.
+    The defined methods may thereby be faulty or in a dirty manner of coding.
+
+
+    public void printIngredientList() throws IllegalAccessException
+    {
+        for (Object x : this.getIngredientList())
+        {
+
+            Object someObject = x;
+            for (Field field : someObject.getClass().getDeclaredFields()) {
+                field.setAccessible(true);
+                Object value = field.get(someObject);
+                if (value != null) {
+                    System.out.print(value+" ");
+                }
+            }
+
+            System.out.println(" ");
+        }
+
+    }
+
+    public void printCook() throws IllegalAccessException
+    {
+        String un = this.getCook().getUsername();
+        System.out.println("Koch: "+un);
+    }
+     */
 }

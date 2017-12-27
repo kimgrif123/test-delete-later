@@ -11,6 +11,13 @@ import java.util.List;
 @Transactional
 public class UserService
 {
+    /*
+    TODO COMMENT: class - UserService
+    The following class abstracts the interaction with instances of the class User
+    by offering services bound to a User object.
+    The spring data annotation @PostConstruct allows the method init() to execute the code within
+    after the application has started and before Users interact with it.
+     */
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;

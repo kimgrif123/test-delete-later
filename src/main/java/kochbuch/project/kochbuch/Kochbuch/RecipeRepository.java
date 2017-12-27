@@ -11,6 +11,12 @@ import java.util.List;
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe,Long>
 {
+    /*
+        TODO COMMENT: repository - RecipeRepository
+        The following class is required to integrate the spring data framework
+        and handles the SQL database queries for the class Recipe.
+    */
+
     @Query("select r from Recipe r where r.id = :id")
     Recipe findByIdRecipe(@Param("id") Long id);
 
