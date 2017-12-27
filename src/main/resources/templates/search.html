@@ -31,13 +31,15 @@
         <tbody>
         <tr>
             <td>
-            <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
-                <h4 style="font-weight:bold" th:text="${searchResult?.name}"></h4><br><br>
-                Bewertung: <b th:text="${searchResult?.avgScore}"></b>
-            </form>
+                <img th:src="${searchResult?.picURL}"><br>
             </td>
             <td>
-                <img th:src="${r?.picURL}" style="width:80%"><br>
+            <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
+                <h4 style="font-weight:bold" th:text="${searchResult?.name}"></h4><br><br>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Bewertung: <b th:text="${searchResult?.avgScore}"></b><br>
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Dauer: <b th:text="${searchResult?.duration}"></b> Minuten<br>
+                <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Schwierigkeitsstufe: <b th:text="${searchResult?.difficulty}"></b><br>
+            </form>
             </td>
             <td>
                 <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">

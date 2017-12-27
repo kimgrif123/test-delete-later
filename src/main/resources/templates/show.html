@@ -39,20 +39,17 @@
 
             <td>
                 <h4>Information:</h4>
-                Koch: <b th:text="${r?.cook?.username}"></b><br>
-                Durchschnittliche Bewertung: <b th:text="${r?.avgScore}"></b><br>
-                Schwierigkeitsstufe: <b th:text="${r?.difficulty}"></b><br>
-                Dauer: <b th:text="${r?.duration}"></b> Minuten<br>
-                Personenanzahl: <b th:text="${r?.numberOfPeople}"></b><br><br>
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>Koch: <b th:text="${r?.cook?.username}"></b><br>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span>Durchschnittliche Bewertung: <b th:text="${r?.avgScore}"></b><br>
+                <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Schwierigkeitsstufe: <b th:text="${r?.difficulty}"></b><br>
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Dauer: <b th:text="${r?.duration}"></b> Minuten<br>
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Personenanzahl: <b th:text="${r?.numberOfPeople}"></b><br><br>
 
                 <form name="calc" action="show.html" method="get" th:if="${r.Id} != 0" onsubmit="return validateCalcForm()">
                     <input type="hidden" value="test" th:value="${r?.Id}" name="rId">
                     <input type="hidden" value="test" th:value="${rId}" name="oId">
                     Personenanzahl <b th:text="${r?.numberOfPeople}"></b>
 
-                    <!--
-                    <div class="form-group" style="width: 30%">
-                        -->
                         <label for="calc"> multiplizieren bei
                             <select class="form-control" id="calc" name="calc">
                                 <option>1</option>
