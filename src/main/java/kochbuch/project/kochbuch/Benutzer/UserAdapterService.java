@@ -12,6 +12,13 @@ import javax.transaction.Transactional;
 @Transactional
 public class UserAdapterService implements UserDetailsService
 {
+    /*
+    TODO COMMENT: class - UserAdapterService
+    The following class is required to integrate the spring security framework
+    and abstracts the creation of a UserAdapter object.
+     */
+
+
     private final UserRepository userRepository;
 
 

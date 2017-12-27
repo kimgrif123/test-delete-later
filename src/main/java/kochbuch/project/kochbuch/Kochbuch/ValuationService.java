@@ -9,8 +9,13 @@ import java.util.List;
 @Transactional
 public class ValuationService
 {
-    private final ValuationRepository  valuationRepository;
+     /*
+    TODO COMMENT: class - ValuationService
+    The following class abstracts the interaction with instances the class Valuation
+    by offering services bound to a Valuation object.
+     */
 
+    private final ValuationRepository  valuationRepository;
 
     public ValuationService(ValuationRepository valuationRepository)
     {

@@ -10,6 +10,12 @@ import java.util.List;
 
 interface UserRepository extends JpaRepository<User,Long>
 {
+    /*
+    TODO COMMENT: repository - UserRepository
+    The following class is required to integrate the spring data framework
+    and handles the SQL database queries for the class User.
+    */
+
     @Query("select u from User u where u.username = :username")
     User findByName(@Param("username") String username);
 
