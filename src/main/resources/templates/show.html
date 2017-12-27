@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div class="page-header">
+<div class="page-header" style="height: 100%">
     <div class="container">
         <div class="btn-group pull-right">
             <a href="login.html" class="btn btn-primary"th:if="${#httpServletRequest.remoteUser} == null">
@@ -141,14 +141,22 @@
                                 <textarea name="comment" id="comment" class="form-control" placeholder="Kommentar" rows="3"></textarea>
                             </div>
 
-                        <input type="hidden" value="test" th:value="${r?.id}" name="rId"><br><br>
+                        <input type="hidden" value="test" th:value="${r?.id}" name="rId">
+
+                        <br>
 
                         <button class="btn btn-success" type="submit">Hinzufügen</button>
 
                     </form>
 
+                    <p><i th:if="${vStatus} == vClose"><b>Melde dich an um das Rezept zu bewerten!</b></i></p>
+
                     <p>
-                        <i th:if="${vStatus} == vClose"><b>Melde dich an um das Rezept zu bewerten!</b></i>
+                        <form action="show.html" method="get" th:if="${vStatus} == vCommented " >
+                            <input type="hidden" value="test" th:value="${r?.id}" name="rId">
+                            <input type="hidden" name="delete" value="delete">
+                            <button class="btn btn-warning" type="submit">Eigene Bewertung löschen</button>
+                        </form>
                     </p>
 
                 </th:block>
