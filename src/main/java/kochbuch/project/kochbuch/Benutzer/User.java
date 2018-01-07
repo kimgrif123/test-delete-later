@@ -8,7 +8,7 @@ public class User
     /*
     TODO - COMMENT: class - User
     The following class contains Getter & Setter for the defined attributes and two constructors.
-    The empty constructor is required to fulfill a requirement of the used Frameworks.
+    The empty constructor is required to fulfill a requirement of Hibernate, the implemented ORM-Framework.
     The implemented Spring Data annotations @Id @GeneratedValue define a ID to be automatically generated,
     when a instance of the class User is saved as an entity(due to @Entity) in the database.
     The annotation "@Column(unique = true)" defines the saved attribute username to be unique in the database.

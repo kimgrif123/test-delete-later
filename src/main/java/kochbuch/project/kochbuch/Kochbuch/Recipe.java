@@ -15,7 +15,7 @@ public class Recipe
         TODO - COMMENT: class - Recipe CHECK!
         The following class contains Getter & Setter for the defined attributes,
         two constructors, calculation methods and a comparator.
-        The empty constructor is required to fulfill a requirement of the used Frameworks.
+        The empty constructor is required to fulfill a requirement of Hibernate, the implemented ORM-Framework.
 
         The implemented annotations @Id @GeneratedValue define a ID to be automatically generated,
         when a instance of the class Recipe is saved as an entity(due to @Entity) in the database.

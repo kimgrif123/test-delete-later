@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 /*
+
 TODO COMMENT: controller - RecipeSearchController
 This controller handels URL - requests to the search.html site.
 Depending on if the "search" and the "vegSearch" parameter is given the controller adds the filtered recipe search results to the model.

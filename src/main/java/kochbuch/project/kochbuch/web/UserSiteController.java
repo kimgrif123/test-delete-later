@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 /*
 TODO COMMENT: controller - UserSiteController
 This controller handles the URL - requests for the userSite.html site.
+Following scenarios are in detail commented:
+
+    1. creating a new recipe
+    2. updating a existing recipe
+    3. adding a new Ingredient to an existing recipe
+    4. removing a Ingredient from an existing recipe
+    5. removing a existing recipe.
  */
 @Controller
 public class UserSiteController

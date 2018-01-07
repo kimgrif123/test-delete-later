@@ -13,8 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by kgrif on 18.11.2017.
  */
 
-@Controller
+/*
+TODO COMMENT: controller - IndexController
 
+    This controller handles the URL - requests for the index.html site.
+    If a mapping to the login.html view is requested, Spring Security is utilized to check if the user is anonymous,
+    if so, the controller maps the URL request to the login.html view, else the user is redirected to the index.html view.
+    Meaning a user cannot login twice.
+ */
+@Controller
 public class IndexController
 {
     @Autowired

@@ -11,7 +11,7 @@ public class Ingredient
     /*
         TODO - COMMENT: class - Ingredient
         The following class contains Getter & Setter for the defined attributes and two constructors.
-        The empty constructor is required to fulfill a requirement of the used Frameworks.
+        The empty constructor is required to fulfill a requirement of Hibernate, the implemented ORM-Framework.
         The implemented annotations @Id @GeneratedValue define a ID to be automatically generated,
         when a instance of the class Ingredient is saved as an entity(@Entity)in the database.
      */
