@@ -246,4 +246,18 @@ public class RecipeService
             return true;
         }
     }
+    public Boolean checkIfUserHasNoNewRecipe(User user)
+    {
+        List<Recipe> userRecipes = findRecipeByCook(user);
+
+        for (Recipe recipe: userRecipes)
+        {
+            if(recipe.getDifficulty() == null)
+            {
+               return true;
+            }
+        }
+
+        return false;
+    }
 }

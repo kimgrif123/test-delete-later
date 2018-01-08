@@ -53,10 +53,12 @@ public class UserSiteController
          */
         if(newRecipe != null)
         {
-            recipeService.createRecipe(user);
-            model.addAttribute("newR",recipeService.findNewRecipe());
+            if(recipeService.findNewRecipe() == null)
+            {
+                recipeService.createRecipe(user);
+                model.addAttribute("newR",recipeService.findNewRecipe());
+            }
             model.addAttribute("userRecipes",recipeService.findRecipeByCook(user));
-            return "userSite";
         }
         /*
             2. updating a existing recipe
@@ -107,7 +109,6 @@ public class UserSiteController
         {
             recipeService.deleteRecipe(newRid);
             model.addAttribute("userRecipes",recipeService.findRecipeByCook(user));
-            return "userSite";
         }
         /*
             If the parameter "newRid" is given, the recipe where the Id equals the parameter value of "newRid"
@@ -116,6 +117,13 @@ public class UserSiteController
         if(newRid!= null)
         {
             model.addAttribute("newR",recipeService.findByIdRecipe(newRid));
+        }
+        /*
+            if a recipe with no given difficulty exists, a new recipe, that information is added to the model
+         */
+        if(recipeService.checkIfUserHasNoNewRecipe(user))
+        {
+            model.addAttribute("aNewRecipeExists","aNewRecipeExists");
         }
 
         model.addAttribute("userRecipes",recipeService.findRecipeByCook(user));

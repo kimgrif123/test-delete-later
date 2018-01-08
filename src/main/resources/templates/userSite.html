@@ -109,22 +109,24 @@ Freigegeben:
                         <h4 style="font-weight:bold" th:text="${userRecipe?.name}"></h4><br>
                         <span class="glyphicon glyphicon-star" aria-hidden="true"></span><h5>Bewertung:</h5> <b th:text="${searchResult?.avgScore}"></b><br><br>
                     </form>
-                    <img th:src="${newR?.picURL}" style="width:80%"><br>
+                    <img th:src="${userRecipe?.picURL}" style="width:80%"><br>
                 </div>
                 <div class="col-sm-3">
                     <form action="userSite.html" method="get"><input type="hidden" name="newRid" th:value="${userRecipe?.id}">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Koch: <b th:text="${newR?.cook?.username}"></b><br>
-                        <span class="glyphicon glyphicon-grain" aria-hidden="true"></span> Rezept: <b th:text="${newR?.name}"></b><br>
-                        <span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Personenanzahl: <b th:text="${newR?.numberOfPeople}"></b><br>
-                        <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Schwierigkeitsstufe: <b th:text="${newR?.difficulty}"></b><br>
-                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Dauer: <b th:text="${newR?.duration}"></b> Minuten<br>
-                        <span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> Vegetarisch: <b th:text="${newR?.vegetarian}"></b><br>
-                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Freigegeben: <b th:text="${newR?.released}"></b><br><br>
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Koch: <b th:text="${userRecipe?.cook?.username}"></b><br>
+                        <span class="glyphicon glyphicon-grain" aria-hidden="true"></span> Rezept: <b th:text="${userRecipe?.name}"></b><br>
+                        <span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Personenanzahl: <b th:text="${userRecipe?.numberOfPeople}"></b><br>
+                        <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Schwierigkeitsstufe: <b th:text="${userRecipe?.difficulty}"></b><br>
+                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Dauer: <b th:text="${userRecipe?.duration}"></b> Minuten<br>
+                        <!--<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> Vegetarisch: <b th:text="${userRecipe?.vegetarian}"></b><br>-->
+                        <b th:if="${userRecipe?.vegetarian} == true"><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> Vegetarisch</b><br>
+                       <!-- <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Freigegeben: <b th:text="${userRecipe?.released}"></b><br>-->
+                        <b th:if="${userRecipe?.released} == true"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Freigegeben</b><br><br>
                     </form>
                 </div>
                 <div class="col-sm-3">
                     <form action="userSite.html" method="get"><input type="hidden" name="newRid" th:value="${userRecipe?.id}">
-                        <h4>Zubereitung:</h4> <b th:text="${newR?.cookingProcess}"></b><br><br>
+                        <h4>Zubereitung:</h4> <b th:text="${userRecipe?.cookingProcess}"></b><br><br>
 
                         <h4>Zutaten: </h4>
                         <table>
@@ -133,11 +135,11 @@ Freigegeben:
                                 <th>Menge</th>
                                 <th>Einheit</th>
                             </tr>
-                            <tr th:each="in : ${newR?.ingredientList}" >
+                            <tr th:each="in : ${userRecipe?.ingredientList}" >
                                 <td th:text="${in.name}"> </td>
                                 <td th:text="${in.quantity}"> </td>
                                 <td th:text="${in.measure}"> </td>
-                                <td><form action="userSite.html" method="get"> <input type="hidden" value="test" th:value="${newR?.id}" name="newRid"> <input type="hidden" name="delete" value="" th:value="${in.id}"><button type="submit">Entfernen</button></form></td>
+                                <td><form action="userSite.html" method="get" > <input type="hidden" value="test" th:value="${userRecipe?.id}" name="newRid"> <input type="hidden" name="delete" value="" th:value="${in.id}"><button type="submit">Entfernen</button></form></td>
                             </tr>
                         </table>
                     </form>
@@ -153,10 +155,11 @@ Freigegeben:
 
         <div class="col-sm-4">
             <h4 style="font-weight: bold; color: green">Bearbeiten</h4>
-            <form name="newRecipe" action="userSite.html" method="get">
+            <form name="newRecipe" action="userSite.html" method="get" th:if="${aNewRecipeExists} == null">
                 <input type="hidden" name="newRecipe" value="newRecipe">
                 <button class="btn btn-success" type="submit">Neues Rezept</button>
             </form>
+            <p><i th:if="${aNewRecipeExists} != null">Vollenden oder Löschen Sie das neue Rezept um mehr Rezepte zu schreiben.</i></p>
 
             <form id="recipe" name="recipe" action="userSite.html" method="get" th:if="${newR} != null" onsubmit="return validateRecipeForm()">
                 <p><i>(PF)</i> = Pflichtfeld</p>
