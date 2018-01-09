@@ -6,8 +6,9 @@
     <script src="/js/Application.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Meine Seite</title>
+    <title>Meine Rezepte</title>
 </head>
+<body>
 
 <div class="page-header">
     <div class="container">
@@ -19,117 +20,53 @@
     </div>
 
     <div class="container">
-        <h1>Meine Seite</h1>
+        <h1>Meine Rezepte</h1>
     </div>
 </div>
 
 
-
-<!--
-<form name="newRecipe" action="userSite.html" method="get">
-    <input type="hidden" name="newRecipe" value="newRecipe">
-    <button type="submit">neues Rezept</button>
-</form>
-
-<form id="recipe" name="recipe" action="userSite.html" method="get" th:if="${newR} != null" onsubmit="return validateRecipeForm()">
-    <p><i>(PF)</i> = Pflichtfeld</p>
-Name <i>(PF)</i>: <input type="text" name="rname"  th:value="${newR?.name}" ><br>
-Dauer <i>(PF)</i>: <input type="number" name="duration" th:value="${newR?.duration}" > Minuten<br>
-Schwierigkeitsgrad <i>(PF)</i>: <input type="number" name="difficulty"  th:value="${newR?.difficulty}" ><br>
-Freigabe: <input type="checkbox" name="released" default="false" th:checked="${newR?.released}" ><br>
-Personenanzahl <i>(PF)</i>: <input type="number" name="pplnr"  th:value="${newR?.numberOfPeople}" ><br>
-Vegetarisch: <input type="checkbox" name="veggie" default="false"  th:checked="${newR?.vegetarian}" ><br>
-
-Kochprozess <i>(PF)</i>: <input type="text" name="cprocess"  th:value="${newR?.cookingProcess}" ><br>
-Bild URL : <input type="text" name="picURL"  th:value="${newR?.picURL}" ><br>
-
-Zutat: <div class="ingredient">Name: <input type="String" name="inna"> Menge: <input type="number" name="innr"> Einheit: <input type="String" name="inun"><br></div>
-   <input type="hidden" value="test" th:value="${newR?.id}" name="newRid">
-    <p><button type="submit">Speichern</button></p>
-</form>
-
-
-
-
-Meine Rezepte:</br>
-<ul th:each="userRecipe: ${userRecipes}">
-    <li>
-        <form action="userSite.html" method="get"><input type="hidden" name="newRid" th:value="${userRecipe?.id}">
-            <b th:text="${userRecipe?.name}"></b>
-            <button value="show" name="show" type="submit">Anzeigen & Bearbeiten</button>
-            <button value="delete" name="deleteRecipe" type="submit">Löschen</button>
-        </form>
-    </li>
-</ul>
-Koch:
-<b th:text="${newR?.cook?.username}"></b><br>
-Rezept:
-<b th:text="${newR?.name}"></b><br>
-Personenanzahl:
-<b th:text="${newR?.numberOfPeople}"></b><br>
-Schwierigkeitsstufe:
-<b th:text="${newR?.difficulty}"></b><br>
-Dauer:
-<b th:text="${newR?.duration}"></b><br>
-Vegetarisch:
-<b th:text="${newR?.vegetarian}"></b><br>
-Zubereitung:
-<b th:text="${newR?.cookingProcess}"></b><br>
-Freigegeben:
-<b th:text="${newR?.released}"></b><br>
-
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Menge</th>
-        <th>Einheit</th>
-    </tr>
-    <tr th:each="in : ${newR?.ingredientList}" >
-        <td th:text="${in.name}"> </td>
-        <td th:text="${in.quantity}"> </td>
-        <td th:text="${in.measure}"> </td>
-        <td><form action="userSite.html" method="get"> <input type="hidden" value="test" th:value="${newR?.id}" name="newRid"> <input type="hidden" name="delete" value="" th:value="${in.id}"><button type="submit">Entfernen</button></form></td>
-    </tr>
-</table>
-
--->
-
-
-
-
 <div class="container">
-    <div class="row">
-        <div class="col-sm-8">
+    <table class="table table-hover">
+        <tbody>
 
-            <div class="row" th:each="userRecipe: ${userRecipes}">
-                <h3 style="color: green">Meine Rezepte:</h3>
+        <form name="newRecipe" action="userSite.html" method="get" th:if="${aNewRecipeExists} == null">
+            <input type="hidden" name="newRecipe" value="newRecipe">
+            <button class="btn btn-success" type="submit">Neues Rezept</button>
+        </form>
+        <p><i th:if="${aNewRecipeExists} != null">Vollenden oder Löschen Sie das neue Rezept um mehr Rezepte zu schreiben.</i></p><br>
 
-                <div class="col-sm-2">
+            <tr th:each="userRecipe: ${userRecipes}">
+                <td>
                     <form action="userSite.html" method="get"><input type="hidden" name="newRid" th:value="${userRecipe?.id}">
-                        <h4 style="font-weight:bold" th:text="${userRecipe?.name}"></h4><br>
-                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span><h5>Bewertung:</h5> <b th:text="${searchResult?.avgScore}"></b><br><br>
+                        <h3 style="color:green; font-weight:bold" th:text="${userRecipe?.name}"></h3><br>
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>Bewertung: <b th:text="${userRecipe?.avgScore}"></b><br><br>
                     </form>
-                    <img th:src="${userRecipe?.picURL}" style="width:80%"><br>
-                </div>
-                <div class="col-sm-3">
+
+                    <img th:src="${userRecipe?.picURL}" style="width:60%"><br><br>
+
                     <form action="userSite.html" method="get"><input type="hidden" name="newRid" th:value="${userRecipe?.id}">
-                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Koch: <b th:text="${userRecipe?.cook?.username}"></b><br>
-                        <span class="glyphicon glyphicon-grain" aria-hidden="true"></span> Rezept: <b th:text="${userRecipe?.name}"></b><br>
-                        <span class="glyphicon glyphicon-pawn" aria-hidden="true"></span> Personenanzahl: <b th:text="${userRecipe?.numberOfPeople}"></b><br>
-                        <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Schwierigkeitsstufe: <b th:text="${userRecipe?.difficulty}"></b><br>
-                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Dauer: <b th:text="${userRecipe?.duration}"></b> Minuten<br>
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        Koch: <b th:text="${userRecipe?.cook?.username}"></b><br>
+                        <span class="glyphicon glyphicon-grain" aria-hidden="true"></span>
+                        Rezept: <b th:text="${userRecipe?.name}"></b><br>
+                        <span class="glyphicon glyphicon-pawn" aria-hidden="true"></span>
+                        Personenanzahl: <b th:text="${userRecipe?.numberOfPeople}"></b><br>
+                        <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span>
+                        Schwierigkeitsstufe: <b th:text="${userRecipe?.difficulty}"></b><br>
+                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        Dauer: <b th:text="${userRecipe?.duration}"></b> Minuten<br>
                         <!--<span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> Vegetarisch: <b th:text="${userRecipe?.vegetarian}"></b><br>-->
                         <b th:if="${userRecipe?.vegetarian} == true"><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span> Vegetarisch</b><br>
-                       <!-- <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Freigegeben: <b th:text="${userRecipe?.released}"></b><br>-->
+                        <!-- <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Freigegeben: <b th:text="${userRecipe?.released}"></b><br>-->
                         <b th:if="${userRecipe?.released} == true"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Freigegeben</b><br><br>
                     </form>
-                </div>
-                <div class="col-sm-3">
+
                     <form action="userSite.html" method="get"><input type="hidden" name="newRid" th:value="${userRecipe?.id}">
-                        <h4>Zubereitung:</h4> <b th:text="${userRecipe?.cookingProcess}"></b><br><br>
+                        <h4>Zubereitung:</h4>
+                        <b th:text="${userRecipe?.cookingProcess}"></b><br><br>
 
                         <h4>Zutaten: </h4>
-                        <table>
+                        <table class="table">
                             <tr>
                                 <th>Name</th>
                                 <th>Menge</th>
@@ -139,49 +76,87 @@ Freigegeben:
                                 <td th:text="${in.name}"> </td>
                                 <td th:text="${in.quantity}"> </td>
                                 <td th:text="${in.measure}"> </td>
-                                <td><form action="userSite.html" method="get" > <input type="hidden" value="test" th:value="${userRecipe?.id}" name="newRid"> <input type="hidden" name="delete" value="" th:value="${in.id}"><button type="submit">Entfernen</button></form></td>
+                                <td>
+                                    <form action="userSite.html" method="get" >
+                                        <input type="hidden" value="test" th:value="${userRecipe?.id}" name="newRid">
+                                        <input type="hidden" name="delete" value="" th:value="${in.id}">
+                                        <button class="btn btn-warning btn-sm" type="submit">Entfernen</button>
+                                    </form>
+                                </td>
                             </tr>
                         </table>
                     </form>
-                </div>
-                <div class="col-sm-4">
+                </td>
+                <td style="background-color: antiquewhite">
+                    <h4 style="font-weight: bold; color: green">Bearbeiten</h4>
+
+                    <br>
+
                     <form action="userSite.html" method="get"><input type="hidden" name="newRid" th:value="${userRecipe?.id}">
-                        <button class="btn btn-success" value="show" name="show" type="submit">Anzeigen & Bearbeiten</button>
+                        <button class="btn btn-success" value="show" name="show" type="submit">Bearbeiten</button>
+                        <br><br>
                         <button class="btn btn-warning" value="delete" name="deleteRecipe" type="submit">Löschen</button>
                     </form>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-sm-4">
-            <h4 style="font-weight: bold; color: green">Bearbeiten</h4>
-            <form name="newRecipe" action="userSite.html" method="get" th:if="${aNewRecipeExists} == null">
-                <input type="hidden" name="newRecipe" value="newRecipe">
-                <button class="btn btn-success" type="submit">Neues Rezept</button>
-            </form>
-            <p><i th:if="${aNewRecipeExists} != null">Vollenden oder Löschen Sie das neue Rezept um mehr Rezepte zu schreiben.</i></p>
+                    <br>
 
-            <form id="recipe" name="recipe" action="userSite.html" method="get" th:if="${newR} != null" onsubmit="return validateRecipeForm()">
-                <p><i>(PF)</i> = Pflichtfeld</p>
-                Name <i>(PF)</i>: <input type="text" name="rname"  th:value="${newR?.name}" ><br>
-                Dauer <i>(PF)</i>: <input type="number" name="duration" th:value="${newR?.duration}" > Minuten<br>
-                Schwierigkeitsgrad <i>(PF)</i>: <input type="number" name="difficulty"  th:value="${newR?.difficulty}" ><br>
-                Freigabe: <input type="checkbox" name="released" default="false" th:checked="${newR?.released}" ><br>
-                Personenanzahl <i>(PF)</i>: <input type="number" name="pplnr"  th:value="${newR?.numberOfPeople}" ><br>
-                Vegetarisch: <input type="checkbox" name="veggie" default="false"  th:checked="${newR?.vegetarian}" ><br>
+                    <form id="recipe" name="recipe" action="userSite.html" method="get" th:if="${newR} != null" onsubmit="return validateRecipeForm()">
+                        <p><i>(PF)</i> = Pflichtfeld</p><br>
+                        <div class="form-group">
+                            <label for="nameinput">Name <i>(PF)</i>:</label>
+                            <input type="text" class="form-control" id="nameinput" name="rname"  th:value="${newR?.name}">
+                        </div>
+                        <div class="form-group">
+                            <label for="durationinput">Dauer <i>(PF)</i>:</label>
+                            <input type="number" class="form-control" id="durationinput" name="duration" placeholder="Minuten" th:value="${newR?.duration}">
+                        </div>
+                        <div class="form-group">
+                            <label for="diffinput">Schwierigkeitsgrad <i>(PF)</i>:</label>
+                            <input type="number" class="form-control" id="diffinput" name="difficulty" th:value="${newR?.difficulty}">
+                        </div>
+                        <div class="form-group">
+                            <label for="personinput">Personenanzahl <i>(PF)</i>:</label>
+                            <input type="number" class="form-control" id="personinput" name="pplnr" th:value="${newR?.numberOfPeople}">
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label"> Freigabe:
+                                <input class="form-check-input" type="checkbox" name="released" default="false" th:checked="${newR?.released}">
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label"> Vegetarisch:
+                                <input class="form-check-input" type="checkbox" name="veggie" default="false"  th:checked="${newR?.vegetarian}">
+                            </label>
+                        </div><br>
+                        <div class="form-group">
+                            <label for="prozessinput">Kochprozess <i>(PF)</i>:</label>
+                            <input type="text" class="form-control" id="prozessinput" name="cprocess"  th:value="${newR?.cookingProcess}">
+                        </div>
+                        <div class="form-group">
+                            <label for="urlinput">Bild URL:</label>
+                            <input type="text" class="form-control" name="pícURL" id="urlinput" th:value="${newR?.picURL}">
+                        </div>
 
-                Kochprozess <i>(PF)</i>: <input type="text" name="cprocess"  th:value="${newR?.cookingProcess}" ><br>
-                Bild URL : <input type="text" name="picURL"  th:value="${newR?.picURL}" ><br>
-
-                Zutat: <div class="ingredient">Name: <input type="String" name="inna"> Menge: <input type="number" name="innr"> Einheit: <input type="String" name="inun"><br></div>
-                <input type="hidden" value="test" th:value="${newR?.id}" name="newRid">
-                <p><button type="submit">Speichern</button></p>
-            </form>
-        </div>
-    </div>
+                        <div class="form-group">
+                            <div class="ingredient">
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="inna" placeholder="Zutat">
+                                    <input class="form-control" type="number" name="innr" placeholder="Menge">
+                                    <input class="form-control" type="text" name="inun" placeholder="Einheit">
+                                </div>
+                            </div>
+                            <input type="hidden" value="test" th:value="${newR?.id}" name="newRid">
+                        </div><br>
+<!--
+                        Zutat: <div class="ingredient">Name: <input type="String" name="inna"> Menge: <input type="number" name="innr"> Einheit: <input type="String" name="inun"><br></div>
+                        <input type="hidden" value="test" th:value="${newR?.id}" name="newRid"> -->
+                        <button class="btn btn-success" type="submit">Speichern</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
-
-
 
 </body>
 </html>
