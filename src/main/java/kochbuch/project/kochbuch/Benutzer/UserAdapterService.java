@@ -18,9 +18,7 @@ public class UserAdapterService implements UserDetailsService
     and abstracts the creation of a UserAdapter object.
      */
 
-
     private final UserRepository userRepository;
-
 
     @Autowired
     public UserAdapterService(UserRepository userRepository)

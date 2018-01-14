@@ -127,7 +127,7 @@ public class RecipeService
 
     public List<Recipe> findRecipeByCook(User user)
     {
-        List<Recipe> allRecipes =  (recipeRepository.findAll());
+        List<Recipe> allRecipes =  findAll();
         List<Recipe> userRecipes = new ArrayList<Recipe>();
 
         for (Recipe recipe: allRecipes)

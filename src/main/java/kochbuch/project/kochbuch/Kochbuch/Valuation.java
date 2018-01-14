@@ -65,18 +65,6 @@ public class Valuation
         this.comment = comment;
     }
 
-    public boolean checkIfUserIsAuthor(User x)
-    {
-        if(this.getAuthor().equals(x))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
     public User getAuthor()
     {
         return author;

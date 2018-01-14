@@ -67,37 +67,4 @@ public class User
         this.password = password;
     }
 
-  /*
-    TODO - COMMENT: unused Admin methods
-    Following methods are not implemented,
-    due to the fact that the Admin Use Cases have been classified as a "KANN" - Target.
-    The time management of the project does not allow the implementation of any Admin Use Case.
-    The defined methods may thereby be faulty or in a dirty manner of coding.
-
-    public void deleteRecipe(Recipe r)
-    {
-        if(r.getCook().equals(this)|| this.getRole() == "ADMIN")
-        {
-            r.setCook(null);
-        }
-        else
-        {
-            System.out.println("Du bist weder Admin, noch Verfasser! Du kannst dieses Rezept nicht löschen.");
-        }
-    }
-
-
-    public void deleteValuation(Recipe x, Valuation v)
-    {
-        if(v.getAuthor().equals(this) || this.getRole()=="ADMIN")
-        {
-            x.getValuationList().remove(v);
-            x.calcAvgScore();
-        }
-        else
-        {
-            System.out.println("nope.");
-        }
-    }
-    */
 }

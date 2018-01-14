@@ -30,12 +30,11 @@ public class UserService
     @PostConstruct
     @Transactional
     public void init() {
-        if (userRepository.count() == 0) {
+        if (userRepository.count() == 0)
+        {
             createUser("Kim", "test", "ADMIN");
             createUser("Nick",  "test", "ADMIN");
             createUser("Kai", "test", "ADMIN");
-
-            System.out.println(userRepository.count());
         }
     }
 

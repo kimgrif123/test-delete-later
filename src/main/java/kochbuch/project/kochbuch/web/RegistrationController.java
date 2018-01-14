@@ -37,7 +37,7 @@ public class RegistrationController
 
 
     @RequestMapping(value="/registration")
-    String registration(@RequestParam(value = "uname", required = false) String uname, @RequestParam(value = "pswd", required = false) String pswd,@RequestParam(value = "wpswd", required = false) String wpswd, Model model)
+    public String registration(@RequestParam(value = "uname", required = false) String uname, @RequestParam(value = "pswd", required = false) String pswd,@RequestParam(value = "wpswd", required = false) String wpswd, Model model)
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 

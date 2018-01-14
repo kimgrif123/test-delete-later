@@ -26,8 +26,6 @@ public class ValuationService
 
     public List<Valuation> findValuationByRecipe(Recipe recipe){return valuationRepository.findValuationByRecipe(recipe);}
 
-    public Valuation findValuationById(Long id){return valuationRepository.findValuationById(id);}
-
     public Valuation findValuationByRecipeAndAuthor(Recipe recipe, User user){return valuationRepository.findValuationByRecipeAndAuthor(recipe,user);}
 
     public void deleteValuation(Valuation valuation){valuationRepository.delete(valuation);}

@@ -287,35 +287,4 @@ public class Recipe
         return x;
     }
 
-    /*
-    TODO ignore
-    Following methods have only been used for try outs.
-    The defined methods may thereby be faulty or in a dirty manner of coding.
-
-
-    public void printIngredientList() throws IllegalAccessException
-    {
-        for (Object x : this.getIngredientList())
-        {
-
-            Object someObject = x;
-            for (Field field : someObject.getClass().getDeclaredFields()) {
-                field.setAccessible(true);
-                Object value = field.get(someObject);
-                if (value != null) {
-                    System.out.print(value+" ");
-                }
-            }
-
-            System.out.println(" ");
-        }
-
-    }
-
-    public void printCook() throws IllegalAccessException
-    {
-        String un = this.getCook().getUsername();
-        System.out.println("Koch: "+un);
-    }
-     */
 }

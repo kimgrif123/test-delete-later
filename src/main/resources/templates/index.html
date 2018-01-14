@@ -37,7 +37,7 @@
                         </li>
                         <li>
                             <form action="/logout" class="pull-right" method="post" th:if="${#httpServletRequest.remoteUser} != null">
-                                <button type="submit" class="btn btn-secondary">
+                                <button type="submit" class="btn btn-secondary" onclick="return confirm('Willst du dich wirklich abmelden?')">
                                     <span class="glyphicon glyphicon-log-out" aria-hidden="true" th:text="${#httpServletRequest.remoteUser}"> </span>
                                     abmelden
                                 </button>

@@ -112,7 +112,7 @@
                     <p>
                         Bewertung: <b th:text="${v?.score}"></b></br>
                         Kommentar: <b th:text="${v?.comment}"></b></br>
-                        Author: <b th:text="${v?.author?.username}"></b></br>
+                        Autor: <b th:text="${v?.author?.username}"></b></br>
                     </p>
                 </th:block>
             </td>
@@ -177,85 +177,3 @@
 
 </body>
 </html>
-
-<!--
-        Koch:
-        <b th:text="${r?.cook?.username}"></b><br>
-        Rezept:
-        <b th:text="${r?.name}"></b><br>
-        Durchschnittliche Bewertung:
-        <b th:text="${r?.avgScore}"></b><br>
-        Personenanzahl:
-        <b th:text="${r?.numberOfPeople}"></b><br>
-        Schwierigkeitsstufe:
-        <b th:text="${r?.difficulty}"></b><br>
-        Dauer:
-        <b th:text="${r?.duration}"></b><br>
-        Zubereitung:
-        <b th:text="${r?.cookingProcess}"></b><br>
-        <p>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Menge</th>
-                    <th>Einheit</th>
-                </tr>
-                <tr th:each="in : ${r?.ingredientList}" >
-                    <td th:text="${in.name}"> </td>
-                    <td th:text="${in.quantity}"> </td>
-                    <td th:text="${in.measure}"> </td>
-                </tr>
-            </table>
-        </p>
-
-
-        <p>
-            <form name="calc" action="show.html" method="get" th:if="${r.Id} != 0" onsubmit="return validateCalcForm()">
-                <input type="hidden" value="test" th:value="${r?.Id}" name="rId">
-
-
-
-            <input type="hidden" value="test" th:value="${rId}" name="oId">
-                Personenanzahl <b th:text="${r?.numberOfPeople}"></b> multiplizieren bei
-            <input type="number" name="calc" id="calc"> <button type="submit">Ausrechnen</button>
-            </form>
-            <form name="nocalc" action="show.html" method="get" th:if="${r.Id} == 0">
-                <input type="hidden" value="test" th:value="${oId}" name="rId">
-                 <button type="submit">zum Original </button>
-            </form>
-        </p>
-
-
-            <h3>Bewertungen</h3>
-        <th:block th:each="v : ${r?.valuationList}">
-            <p>
-            Bewertung: <b th:text="${v?.score}"></b></br>
-            Kommentar: <b th:text="${v?.comment}"></b></br>
-            Author: <b th:text="${v?.author?.username}"></b></br>
-            </p>
-        </th:block>
-
-        <th:block th:if="${r.Id} != 0">
-         <form id="valuation" name="valuation" action="show.html" method="get" th:if="${vStatus} == vOpen" onsubmit="return validateValuationForm()">
-            <div class="valuation">Bewertung 1 - 10: <input type="number" name="score" id="score">
-
-
-                </br> Kommentar: <input type="text" name="comment"> </div>
-            <input type="hidden" value="test" th:value="${r?.id}" name="rId">
-            <p><button type="submit">Hinzufügen</button></p>
-         </form>
-         <p>
-            <i th:if="${vStatus} == vClose"><b>Melde dich an um das Rezept zu bewerten!</b></i>
-         </p>
-
-         <p>
-
-            <form action="show.html" method="get" th:if="${vStatus} == vCommented " >
-                <input type="hidden" value="test" th:value="${r?.id}" name="rId">
-                <input type="hidden" name="delete" value="delete">
-            <p><button type="submit">Eigene Bewertung löschen</button></p>
-            </form>
-         </p>
-        </th:block>
--->
-

@@ -69,6 +69,7 @@ public class UserSiteController
          */
         if(newRid != null && rname != null && duration != null && diff != null && pplnr != null && cprocess != null)
         {
+            System.out.println(picURL);
             recipeService.updateRecipe(newRid,rname,cprocess,diff,duration,pplnr,released,veggie,picURL);
             model.addAttribute("newR",recipeService.findByIdRecipe(newRid));
         }
