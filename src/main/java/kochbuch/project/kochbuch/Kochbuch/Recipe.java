@@ -11,17 +11,30 @@ import java.util.List;
 @Entity
 public class Recipe
 {
+    /*
+        TODO - COMMENT: class - Recipe CHECK!
+        The following class contains Getter & Setter for the defined attributes,
+        two constructors, calculation methods and a comparator.
+        The empty constructor is required to fulfill a requirement of Hibernate, the implemented ORM-Framework.
+
+        The implemented annotations @Id @GeneratedValue define a ID to be automatically generated,
+        when a instance of the class Recipe is saved as an entity(due to @Entity) in the database.
+
+        The annotations @OneToMany, @OneToOne define the entity relationships while orphanRemoval
+        enables a cascading deletion of foreign key bound entities.
+     */
+
     @Id
     @GeneratedValue
     private long id;
     private String name;
-    @OneToMany(orphanRemoval = true , mappedBy = "recipe")
+    @OneToMany(orphanRemoval = true, mappedBy = "recipe")
     private List<Ingredient>  ingredientList;
     private String cookingProcess;
-    private double numberOfPeople;
+    private Integer numberOfPeople;
 
     private Integer difficulty;
-    private Duration duration;
+    private Integer duration;
     private Boolean released;
     private Boolean vegetarian;
     @OneToMany(orphanRemoval = true , mappedBy = "recipe")
@@ -30,17 +43,33 @@ public class Recipe
     @OneToOne
     private User cook;
 
-    public Recipe(User cook, String name)
+    private String picURL;
+    public Recipe(User cook)
+    {
+        this.valuationList = new ArrayList<Valuation>();
+        this.ingredientList = new ArrayList<Ingredient>();
+        this.name = new String();
+        this.cookingProcess = new String();
+        this.numberOfPeople = null;
+        this.duration = null;
+        this.released = false;
+        this.vegetarian = false;
+        this.setCook(cook);
+    }
+
+    public Recipe (User cook, String name)
     {
         this.valuationList = new ArrayList<Valuation>();
         this.ingredientList = new ArrayList<Ingredient>();
         this.cookingProcess = new String();
-        this.duration = Duration.ofMinutes(0);
+        this.duration = null;
         this.released = false;
         this.vegetarian = false;
         this.setCook(cook);
-        this.setName(name);
+        this.name = name;
     }
+
+    public Recipe(){}
 
     public User getCook()
     {
@@ -51,7 +80,13 @@ public class Recipe
     {
         this.cook = cook;
     }
+    public String getPicURL() {
+        return picURL;
+    }
 
+    public void setPicURL(String picURL) {
+        this.picURL = picURL;
+    }
     public long getId(){return id;}
 
     public String getName() {
@@ -72,7 +107,10 @@ public class Recipe
 
     public List<Ingredient> getIngredientList()
     {
-        return this.ingredientList;
+        if (ingredientList == null) {
+            ingredientList = new ArrayList<>();
+        }
+        return ingredientList;
     }
 
     public void addIngredientToList(Ingredient c)
@@ -85,31 +123,11 @@ public class Recipe
         this.ingredientList.remove(c);
     }
 
-    public void printIngredientList() throws IllegalAccessException
+    public void addValuationToList(Valuation v)
     {
-        for (Object x : this.getIngredientList())
-        {
-
-            Object someObject = x;
-            for (Field field : someObject.getClass().getDeclaredFields()) {
-                field.setAccessible(true);
-                Object value = field.get(someObject);
-                if (value != null) {
-                    System.out.print(value+" ");
-                }
-            }
-
-            System.out.println(" ");
-        }
-
+        this.valuationList.add(v);
     }
 
-    public void printCook() throws IllegalAccessException
-    {
-        String fn = this.getCook().getFirstname();
-        String ln = this.getCook().getLastname();
-        System.out.println("Koch: "+fn+" "+ln);
-    }
     public String getCookingProcess()
     {
         return this.cookingProcess;
@@ -120,12 +138,12 @@ public class Recipe
         this.cookingProcess = cookingProcess;
     }
 
-    public double getNumberOfPeople()
+    public Integer getNumberOfPeople()
     {
         return this.numberOfPeople;
     }
 
-    public void setNumberOfPeople(double numberOfPeople)
+    public void setNumberOfPeople(Integer numberOfPeople)
     {
         this.numberOfPeople = numberOfPeople;
     }
@@ -140,14 +158,14 @@ public class Recipe
         this.difficulty = difficulty;
     }
 
-    public Duration getDuration()
+    public Integer getDuration()
     {
         return this.duration;
     }
 
-    public void setDuration(Integer x)
+    public void setDuration(Integer duration)
     {
-        this.duration = this.duration.ofMinutes(x);
+        this.duration = duration;
     }
 
     public Boolean getReleased()
@@ -165,11 +183,9 @@ public class Recipe
         return this.valuationList;
     }
 
-    public void setValuationList(Valuation v)
+    public void setValuationList(List<Valuation> v)
     {
-        this.valuationList.remove(v);
-        this.valuationList.add(v);
-        this.calcAvgScore();
+        this.valuationList = v;
     }
 
     public void removeValuation(Valuation v)
@@ -219,20 +235,21 @@ public class Recipe
         this.ingredientList = x;
     }
 
-    public Recipe recipeCalculator(double m)
+    public Recipe recipeCalculator(Integer m)
     {
 
         Recipe indi = this.clone();
-        Integer y = indi.getIngredientList().size();
-        double multiply = m;
+
+        Integer z = indi.getDuration();
+        Integer multiply = m;
 
        List<Ingredient> indiList = indi.getIngredientList();
-
+       Integer newDuration = z*multiply;
         for(Ingredient in: indiList)
         {
             in.setQuantity(in.getQuantity()*multiply);
         }
-
+        indi.setDuration(newDuration);
         indi.setNumberOfPeople(multiply);
         indi.setIngredientList(indiList);
 
@@ -253,9 +270,9 @@ public class Recipe
     @Override
     public Recipe clone()
     {
-        Recipe x = new Recipe(null,"");
-
+        Recipe x = new Recipe(null);
         x.cook = this.getCook();
+        x.name = this.getName();
         x.avgScore = this.getAvgScore();
         x.cookingProcess = this.getCookingProcess();
         x.difficulty = this.getDifficulty();
@@ -265,6 +282,7 @@ public class Recipe
         x.released = this.getReleased();
         x.valuationList = this.getValuationList();
         x.ingredientList = this.getIngredientList();
+        x.picURL = this.getPicURL();
 
         return x;
     }

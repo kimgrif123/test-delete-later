@@ -7,6 +7,14 @@ import javax.persistence.*;
 @Entity
 public class Valuation
 {
+    /*
+        TODO - COMMENT: class - Valuation
+        The following class contains Getter & Setter for the defined attributes, two constructors and a comparator.
+        The empty constructor is required to fulfill a requirement of Hibernate, the implemented ORM-Framework.
+        The implemented annotations @Id @GeneratedValue define a ID to be automatically generated,
+        when a instance of the class Valuation is saved as an entity(@Entity)in the database.
+     */
+
     @Id
     @GeneratedValue
     private long id;
@@ -24,6 +32,7 @@ public class Valuation
         this.comment = comment;
         this.author = author;
     }
+    public Valuation() {}
 
     public Integer getScore()
     {
@@ -54,18 +63,6 @@ public class Valuation
     {
 
         this.comment = comment;
-    }
-
-    public boolean checkIfUserIsAuthor(User x)
-    {
-        if(this.getAuthor().equals(x))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
     }
 
     public User getAuthor()

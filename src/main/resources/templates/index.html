@@ -2,38 +2,101 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="/js/Application.js"></script>
         <title>Kochbuch</title>
-        <link rel="stylesheet" type="text/css"
-              href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     </head>
 
     <body>
-    <!--mlns:th="http:www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}"-->
+
+    <div class="page-header">
         <div class="container">
-            <p class="page-header">
-                <h1>Kochbuch</h1>
-           <p> <a href="/login.html">Login</a></p>
-            <p> <a href="/registration.html">Registrieren</a></p>
+            <div class="btn-group pull-right">
 
-
-            <form action="search.html" method="get">
-
-                Ich hab Lust auf...  <input type="text" name="searchItem">
-
-                <input type="submit" value="suchen">
-
-            </form>
-
-
-            <a href="search.html?searchItem=Vegetarian">
-                <div>
-                    Vegetarisch geht`s hier lang!
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Menu
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                        <li>
+                            <a href="login.html" class="btn btn-secondary"th:if="${#httpServletRequest.remoteUser} == null">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login
+                            </a>
+                        </li>
+                        <li>
+                            <a href="registration.html" class="btn btn-secondary"th:if="${#httpServletRequest.remoteUser} == null">
+                                <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Registrieren
+                            </a>
+                        </li>
+                        <li>
+                            <a href="userSite.html" class="btn btn-secondary">
+                                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Meine Seite
+                            </a>
+                        </li>
+                        <li>
+                            <form action="/logout" class="pull-right" method="post" th:if="${#httpServletRequest.remoteUser} != null">
+                                <button type="submit" class="btn btn-secondary" onclick="return confirm('Willst du dich wirklich abmelden?')">
+                                    <span class="glyphicon glyphicon-log-out" aria-hidden="true" th:text="${#httpServletRequest.remoteUser}"> </span>
+                                    abmelden
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
-            </a>
 
+            </div>
         </div>
+        <div class="container">
+            <h1>Kochbuch Homepage</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-md-6">
+            <form action="search.html" method="get" class="form-horizontal">
+                <div class="form-group">
+                    <label for="inputSearch"> Ich habe Lust auf... </label>
+                    <input type="text" class="form-control" id="inputSearch" name="search" style="width:90%" />
+                    <div class="col-md">
+                        <section>
+                            <img class="slideshow" src="https://atmedia.imgix.net/5cdc344761c20615ed0543f9615fdda8f169cae3?auto=format&q=45&w=640.0&h=430.0&fit=max&cs=strip"
+                                 style="width:90%">
+                            <img class="slideshow" src="http://www.seriouseats.com/recipes/assets_c/2017/03/20170210-chicken-massaman-emily-matt-clifton-4-thumb-1500xauto-436790.jpg"
+                                 style="width:90%">
+                            <img class="slideshow" src="http://img1.cookinglight.timeinc.net/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/2017/09/main/autumn-glow-salad-1711p85.jpg?itok=xsUVd68s"
+                                 style="width:90%">
+                        </section>
+
+                        <script>
+                            var myIndex = 0;
+                            carousel();
+                        </script>
+
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Alle Rezepte durchsuchen
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <form action="/search" method="get" class="form-horizontal">
+                <div class="form-group">
+                    <label for="vegSearch"> Oder vielleicht vegetarisch? </label>
+                    <input type="text" class="form-control" id="vegSearch" name="vegSearch" style="width:90%" />
+                    <img src="http://www.lecker.de/assets/field/image/griechischer-salat_0.jpg" style="width:90%">
+                    <button  type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Vegetarisch durchsuchen
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     </body>
 

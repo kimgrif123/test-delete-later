@@ -1,62 +1,60 @@
 package kochbuch.project.kochbuch.Benutzer;
 
-import kochbuch.project.kochbuch.Kochbuch.Recipe;
-import kochbuch.project.kochbuch.Kochbuch.Valuation;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User
 {
-    @Id
-    @GeneratedValue
-    private Long id;
-    private Boolean administrator;
+    /*
+    TODO - COMMENT: class - User
+    The following class contains Getter & Setter for the defined attributes and two constructors.
+    The empty constructor is required to fulfill a requirement of Hibernate, the implemented ORM-Framework.
+    The implemented Spring Data annotations @Id @GeneratedValue define a ID to be automatically generated,
+    when a instance of the class User is saved as an entity(due to @Entity) in the database.
+    The annotation "@Column(unique = true)" defines the saved attribute username to be unique in the database.
+     */
 
-    private String firstname;
-    private String lastname;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    private String role;
+    @Column(unique = true)
+    private String username;
     private String password;
 
-    public User(Boolean administrator, String firstname, String lastname, String password)
+
+    public User (){}
+
+    public User(String role, String username, String password)
     {
-        this.administrator = administrator;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.role = role;
+        this.username = username;
         this.password = password;
+
     }
 
-    public Boolean getAdministrator()
+    public String getRole()
     {
-        return administrator;
+        return role;
     }
 
-    public void setAdministrator(Boolean administrator)
+    public void setRole(String role)
     {
-        this.administrator = administrator;
+        this.role = role;
     }
 
     public Long getid(){return id;}
 
-    public String getFirstname()
+    public void setid(Long id){this.id = id;}
+
+    public String getUsername()
     {
-        return firstname;
+        return username;
     }
 
-    public void setFirstname(String firstname)
+    public void setUsername(String username)
     {
-        this.firstname = firstname;
-    }
-
-    public String getLastname()
-    {
-        return lastname;
-    }
-
-    public void setLastname(String lastname)
-    {
-        this.lastname = lastname;
+        this.username = username;
     }
 
     public String getPassword()
@@ -69,27 +67,4 @@ public class User
         this.password = password;
     }
 
-    public void deleteRecipe(Recipe r)
-    {
-        if(r.getCook().equals(this)|| this.getAdministrator())
-        {
-            r.setCook(null);
-        }
-        else
-        {
-            System.out.println("Du bist weder Admin, noch Verfasser! nix löschen.");
-        }
-    }
-    public void deleteValuation(Recipe x, Valuation v)
-    {
-        if(v.getAuthor().equals(this) || this.getAdministrator())
-        {
-            x.getValuationList().remove(v);
-            x.calcAvgScore();
-        }
-        else
-        {
-            System.out.println("nope.");
-        }
-    }
 }

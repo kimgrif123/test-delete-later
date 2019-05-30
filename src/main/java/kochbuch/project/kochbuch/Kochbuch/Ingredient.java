@@ -8,22 +8,31 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Ingredient
 {
+    /*
+        TODO - COMMENT: class - Ingredient
+        The following class contains Getter & Setter for the defined attributes and two constructors.
+        The empty constructor is required to fulfill a requirement of Hibernate, the implemented ORM-Framework.
+        The implemented annotations @Id @GeneratedValue define a ID to be automatically generated,
+        when a instance of the class Ingredient is saved as an entity(@Entity)in the database.
+     */
+
     @Id
     @GeneratedValue
-    private long  id;
+    private Long  id;
     @ManyToOne
     private Recipe recipe;
-    private double quantity;
+    private Double quantity;
     private String measure;
     private String name;
 
-    public Ingredient(Recipe recipe, String name, double quantity, String measure)
+    public Ingredient(Recipe recipe, String name, Double quantity, String measure)
     {
         this.recipe = recipe;
         this.name = name;
         this.quantity = quantity;
         this.measure = measure;
     }
+    public Ingredient(){}
 
     public String getName()
     {
@@ -44,12 +53,12 @@ public class Ingredient
     }
 
 
-    public double getQuantity()
+    public Double getQuantity()
     {
         return quantity;
     }
 
-    public void setQuantity(double quantity)
+    public void setQuantity(Double quantity)
     {
         this.quantity = quantity;
     }
@@ -64,7 +73,7 @@ public class Ingredient
         this.measure = measure;
     }
 
-    public long getId(){return id;}
+    public Long getId(){return id;}
 
 }
 

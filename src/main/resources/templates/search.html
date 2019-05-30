@@ -3,11 +3,53 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Rezepte</title>
 
 </head>
 
 <body>
+
+<div class="page-header">
+    <div class="container">
+        <div class="btn-group pull-right">
+            <a href="/" type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Rezepte</h1>
+    </div>
+</div>
+
+<div class="container">
+    <h3 style="color: green">Suchergebnisse:</h3>
+    <table class="table table-hover" th:each="searchResult: ${searchResults}" >
+        <tbody>
+        <tr>
+            <td>
+                <img th:src="${searchResult?.picURL}"><br>
+            </td>
+            <td>
+            <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
+                <h4 style="font-weight:bold" th:text="${searchResult?.name}"></h4><br><br>
+                <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Bewertung: <b th:text="${searchResult?.avgScore}"></b><br>
+                <span class="glyphicon glyphicon-time" aria-hidden="true"></span> Dauer: <b th:text="${searchResult?.duration}"></b> Minuten<br>
+                <span class="glyphicon glyphicon-certificate" aria-hidden="true"></span> Schwierigkeitsstufe: <b th:text="${searchResult?.difficulty}"></b><br>
+            </form>
+            </td>
+            <td>
+                <form action="show.html" method="get"><input type="hidden" name="rId" th:value="${searchResult?.id}">
+                    <button class="btn btn-success" value="show" name="show" type="submit">Anzeigen</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 </body>
 

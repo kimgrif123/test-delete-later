@@ -2,42 +2,59 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>Registrierung</title>
 </head>
+
 <body>
 
 <div class="page-header">
-    <a href="" class="btn btn-xs btn-link pull-right">
-        <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
-    </a>
-    <h1>Registrierung</h1>
+    <div class="container">
+        <div class="btn-group pull-right">
+            <a href="/" class="btn btn-primary">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Zurück zur Startseite
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Registrierung</h1>
+    </div>
 </div>
 
-    <div class="container">
+<div class="container">
 
-        <form action="registration.html" method="get">
+    <h4><b>In wenigen Schritten bist du dabei!</b></h4> <br><br>
 
-            <label for="fname">Vorname:</label> <input type="text" name="fname" id="fname"><br>
-            <label for="lname">Nachname:</label> <input type="text" name="lname" id="lname"><br>
-            <label for="pswd">Passwort:</label> <input type="password" name="pswd" id="pswd"><br>
-            <label for="wpswd">Passwort wiederholen:</label> <input type="password" name="wpswd" id="wpswd"><br>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <a href="/" type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Registrieren
-                    </a>
-                </div>
+    <form action="registration.html" method="get" class="form-horizontal">
+        <div class="form-group">
+            <label for="uname" class="col-sm-2 control-label">Nutzername</label>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="uname" name="uname" style="width:90%"/>
             </div>
-
-        </form>
-
-        <p th:text="${fname}" ></p>
-        <p th:text="${lname}" ></p>
-        <p th:text="${pswd}" ></p>
-        <p th:text="${wpswd}" ></p>
-
-    </div>
+        </div>
+        <div class="form-group">
+            <label for="pswd" class="col-sm-2 control-label">Passwort</label>
+            <div class="col-md-6">
+                <input type="password" class="form-control" id="pswd" name="pswd" style="width:90%"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="wpswd" class="col-sm-2 control-label">Passwort wiederholen</label>
+            <div class="col-md-6">
+                <input type="password" class="form-control" id="wpswd" name="wpswd" style="width:90%"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true">Registrieren</span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
 
 </body>
 </html>
